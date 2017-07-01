@@ -1,2 +1,4 @@
 /.vscode
 /.vs
+/blog/__pycache__
+*.py[cod]
