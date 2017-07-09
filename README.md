@@ -11,4 +11,7 @@
 * 前端 Bootstrap
 * 后台环境 Linux, Nginx部署
 * 后端框架 Flask
-* 数据库 关系型或者非关系型，待评定
+* 数据库 MongoDB
+
+
+### 已完成
