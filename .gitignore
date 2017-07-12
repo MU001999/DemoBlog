@@ -1,4 +1,5 @@
 /.vscode
 /.vs
+/db
 /blog/__pycache__
 *.py[cod]

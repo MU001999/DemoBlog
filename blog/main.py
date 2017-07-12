@@ -1,18 +1,33 @@
-from flask import render_template, redirect, request
+import os
+from flask import render_template, redirect, request, session
 from blog import app
 from blog.link2db import *
+
+app.secret_key = os.urandom(24)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        username, password = request.form['username'], request.form['password']
+        ans = check(username, password)
+        if ans:
+            session['logged_in'] = True
+            session['username'], session['password'], session['nickname'] = username, password, ans
+            return redirect('/')
+        return render_template('login.html', sth_wrong=True)
+    return render_template('login.html', sth_wrong=False)
 
 @app.route('/logout')
 def logout():
-    return None
+    session.pop('username', None)
+    session.pop('password', None)
+    session.pop('nickname', None)
+    session['logged_in'] = False
+    return redirect('/')
 
 @app.route('/signup')
 def signup():
@@ -20,6 +35,12 @@ def signup():
 
 @app.route('/adduser', methods=['POST'])
 def adduser():
-    if check_exist(request.form['userid']):
+    if check_exist(request.form['username']):
         return render_template('/signup.html', sth_wrong=True)
-    return redirect('/login')
+    if add_user(request.form['username'], request.form['password'], request.form['nickname']):
+        session['logged_in'] = True
+        session['username'] = request.form['username']
+        session['password'] = request.form['password']
+        session['nickname'] = request.form['nickname']
+        return redirect('/')
+    return render_template('signup.html', sth_wrong=True)
