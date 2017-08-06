@@ -8,11 +8,14 @@
 
 
 ### 技术选型
-* 前端 Bootstrap
-* 后台环境 Linux, Nginx部署
-* 后端框架 Flask
-* 数据库 MongoDB
+* Bootstrap
+* Nginx
+* Flask
+* MongoDB
 
 
 ### 已完成
 * 用户注册、登录
+
+### ING
+* 贴代码
