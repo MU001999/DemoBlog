@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import os
 from flask import render_template, redirect, request, session
 from blog import app
 from blog.link2db import *
-
 
 app.secret_key = os.urandom(24)
 
@@ -39,8 +40,8 @@ def signup():
     return  render_template('signup.html', sth_wrong=False)
 
 
-@app.route('/adduser', methods=['POST'])
-def add_user():
+@app.route('/register', methods=['POST'])
+def registration():
     if check_exist(request.form['username']):
 
         return render_template('/signup.html', sth_wrong=True)

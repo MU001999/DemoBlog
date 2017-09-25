@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 This script runs the blog application using a development server.
 """

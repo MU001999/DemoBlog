@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pymongo
 
 
@@ -21,6 +22,6 @@ def check_exist(username):
 def add_user(username, password, nickname):
     try:
         col.insert_one({'username': username, 'password': password, 'nickname': nickname})
-        return True
+        return Truedbs
     except:
         raise False
