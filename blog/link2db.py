@@ -32,7 +32,12 @@ def add_user(username, password, nickname):
 def add_code(poster, syntax, content):
     try:
         order = codes.find().count()
-        users.insert_one({'poster': poster, 'syntax': syntax, 'content': content, 'order': order})
+        codes.insert_one({'poster': poster, 'syntax': syntax, 'content': content, 'order': order})
         return order
     except:
         raise MemoryError
+
+
+def get_code(order):
+    code = codes.find_one({"order": order})
+    return code['poster'], code['syntax'], code['content']

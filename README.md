@@ -3,7 +3,7 @@
 ### 功能
 * 用户注册、登录
 * 发表文章（文章分栏（我，别人））
-* 贴代码
+* 贴代码（code highlight by using highlight.js）
 * 论坛
 
 

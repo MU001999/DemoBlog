@@ -8,11 +8,9 @@
     </h1>
 </div>
 <div class="jumbotron">
-    <h1></h1>
-    <h3></h3>
-    <pre name="" class="">
-
-    </pre>
+    <h1>{{ poster }}</h1>
+    <h3>{{ syntax }}</h3>
+    <pre><code class="{{ syntax }}">{{ content|e }}</code></pre>
 </div>
 
 {% endblock %}
