@@ -6,6 +6,6 @@ from blog import app
 from blog.link2db import *
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def hello_world():
     return render_template('index.html')
