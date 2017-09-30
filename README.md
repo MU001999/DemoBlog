@@ -1,5 +1,7 @@
 # Jusot's WebSite
 
+> Test on jusot.com:5555 now
+
 ### 功能
 * 用户注册、登录
 * 发表文章（文章分栏（我，别人））
