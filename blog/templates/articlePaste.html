@@ -2,14 +2,14 @@
 
 {% block content %}
 
+<form method="post" action="/articles/paste">
 <div class="page-header">
-	<h1>
-		{{ title }}<small>{{ author }}</small>
-	</h1>
+	<div class="col-sm-10">
+      <input class="form-control" name="title" placeholder="Input your title">
+    </div>
 </div>
-
-<div class="jumbotron">
-	{{ content|e }}
-</div>
+	<textarea class="form-control" rows="30"></textarea>
+    <button class="btn btn-default" type="submit">发表</button>
+</form>
 
 {% endblock %}
