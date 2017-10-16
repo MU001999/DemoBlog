@@ -7,8 +7,10 @@ db = conn.demoblog
 
 users = db.users
 codes = db.codes
+articles = db.articles
 
 
+# for users
 def check(username, password):
     if users.find_one({"username": username, 'password': password}):
         return users.find_one({"username": username, 'password': password})['nickname']
@@ -29,6 +31,7 @@ def add_user(username, password, nickname):
         raise False
 
 
+# for codes
 def add_code(poster, syntax, content):
     try:
         order = codes.find().count()
@@ -41,3 +44,16 @@ def add_code(poster, syntax, content):
 def get_code(order):
     code = codes.find_one({"order": order})
     return code['poster'], code['syntax'], code['content']
+
+
+# for articles
+def add_article():
+    pass
+
+
+def get_article(article_id):
+    pass  # TODO: return title, author, content
+
+
+def get_articles():
+    pass
