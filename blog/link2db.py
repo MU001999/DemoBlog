@@ -47,12 +47,18 @@ def get_code(order):
 
 
 # for articles
-def add_article():
-    pass
+def add_article(title, author, content):
+    try:
+        order = articles.find().count()
+        articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order})
+        return order
+    except:
+        raise MemoryError
 
 
 def get_article(article_id):
-    pass  # TODO: return title, author, content
+    article = articles.find_one({'order': article_id})
+    return article['title'], article['author'], article['content']
 
 
 def get_articles():
