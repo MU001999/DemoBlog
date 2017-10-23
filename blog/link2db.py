@@ -47,10 +47,10 @@ def get_code(order):
 
 
 # for articles
-def add_article(title, author, content):
+def add_article(title, author, content, time_post):
     try:
         order = articles.find().count()
-        articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order})
+        articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post})
         return order
     except:
         raise MemoryError

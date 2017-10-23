@@ -2,4 +2,22 @@
 
 {% block content %}
 
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="pagination">
+				<li>
+					 <a href="#">Prev</a>
+				</li>
+                {% for page_id in page_ids %}
+				<li>
+					 <a href="{{  }}">1</a>
+				</li>
+                {% endfor %}
+				<li>
+					 <a href="#">Next</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
 {% endblock %}
