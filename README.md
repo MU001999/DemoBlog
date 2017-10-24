@@ -4,7 +4,7 @@
 
 ### 功能
 * 用户注册、登录
-* 发表文章（所有用户）
+* 发表文章（for all users）
 * 贴代码（using highlight.js）
 * 论坛
 
