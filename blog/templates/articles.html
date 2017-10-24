@@ -2,22 +2,32 @@
 
 {% block content %}
 
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<ul class="pagination">
-				<li>
-					 <a href="#">Prev</a>
-				</li>
-                {% for page_id in page_ids %}
-				<li>
-					 <a href="{{  }}">1</a>
-				</li>
-                {% endfor %}
-				<li>
-					 <a href="#">Next</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        {% for article in articles %}
+        <div class="page-header">
+            <a href="/articles/{{ article.order }}">
+                <h1>
+                    {{ article.title }}
+                    <small>{{ article.author }}</small>
+                </h1>
+            </a>
+        </div>
+        {% endfor %}
+        <ul class="pagination">
+            <li>
+                <a href="#">Prev</a>
+            </li>
+            {% for page_id in page_ids %}
+            <li>
+                <a href="/articles/all/{{ page_id }}">{{ page_id }}</a>
+            </li>
+            {% endfor %}
+            <li>
+                <a href="#">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 {% endblock %}

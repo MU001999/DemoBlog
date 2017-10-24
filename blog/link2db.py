@@ -54,7 +54,7 @@ def add_article(title, author, content, time_post):
         return order
     except:
         raise MemoryError
-
+# TODO: refresh the articles(sorted) after one add.
 
 def get_article(article_id):
     article = articles.find_one({'order': article_id})
@@ -63,3 +63,4 @@ def get_article(article_id):
 
 def get_articles():
     pass
+# TODO: get the articles from add_article() and return the special articles.

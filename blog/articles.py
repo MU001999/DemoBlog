@@ -29,4 +29,5 @@ def set_article(article_id):
 
 @app.route('/articles/all/<int:page_id>')
 def set_articles(page_id):
-    page_ids = range(max(0, page_id-2), page_id)
+    articles = page_ids = None
+    return render_template('articles.html', articles=articles, page_ids=page_ids)
