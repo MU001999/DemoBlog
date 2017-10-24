@@ -9,6 +9,8 @@ users = db.users
 codes = db.codes
 articles = db.articles
 
+articles_sorted = articles.find().sort("order")
+
 
 # for users
 def check(username, password):
@@ -48,19 +50,21 @@ def get_code(order):
 
 # for articles
 def add_article(title, author, content, time_post):
+    global articles_sorted
     try:
         order = articles.find().count()
         articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post})
+        articles_sorted = articles.find().sort("order")
         return order
     except:
         raise MemoryError
-# TODO: refresh the articles(sorted) after one add.
+
 
 def get_article(article_id):
     article = articles.find_one({'order': article_id})
-    return article['title'], article['author'], article['content']
+    return article['title'], article['author'], article['content'], article['time_post']
 
 
-def get_articles():
-    pass
-# TODO: get the articles from add_article() and return the special articles.
+def get_articles(page_id):
+    _ = articles_sorted.clone()
+    return _[page_id*10: min(page_id*10+10, articles_sorted.count())]

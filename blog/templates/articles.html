@@ -6,10 +6,10 @@
     <div class="col-md-12 column">
         {% for article in articles %}
         <div class="page-header">
-            <a href="/articles/{{ article.order }}">
+            <a href="/articles/{{ article['order'] }}">
                 <h1>
-                    {{ article.title }}
-                    <small>{{ article.author }}</small>
+                    {{ article['title'] }}
+                    <small>{{ article['author'] }}</small>
                 </h1>
             </a>
         </div>
