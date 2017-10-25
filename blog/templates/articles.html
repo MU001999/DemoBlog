@@ -21,7 +21,7 @@
         {% endfor %}
         <ul class="pagination">
             <li>
-                <a href="#">Prev</a>
+                <a href="/articles/all/{{ pre }}">Prev</a>
             </li>
             {% for page_id in page_ids %}
             <li>
@@ -29,7 +29,7 @@
             </li>
             {% endfor %}
             <li>
-                <a href="#">Next</a>
+                <a href="/articles/all/{{ next }}">Next</a>
             </li>
         </ul>
     </div>

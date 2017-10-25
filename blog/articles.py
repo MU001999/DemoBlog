@@ -31,4 +31,4 @@ def set_article(article_id):
 def set_articles(page_id=0):
     page_ids = range(max(0, min(page_id-2, articles.count()/10)), min(page_id+3, articles.count()/10)+1)
     _articles = get_articles(page_id)
-    return render_template('articles.html', author="ALL AUTHORS", articles=_articles, page_ids=page_ids)
+    return render_template('articles.html', author="ALL AUTHORS", articles=_articles, pre=max(page_id-1, 0), page_ids=page_ids, next=min(articles.count(), page_id+1))
