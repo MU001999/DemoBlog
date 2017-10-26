@@ -48,3 +48,23 @@ def signup():
         return redirect('/')
 
     return render_template('signup.html', sth_wrong=True)
+
+
+@app.route('/editpwd', methods=['GET', 'POST'])
+def edit_pwd():
+    if request.method == 'GET':
+        return render_template('edit.html', see=False)
+    u2n = request.form['password']
+    update_user(session['username'], u2n, "pwd")
+    session['password'] = u2n
+    return redirect('/')
+
+
+@app.route('/editnick', methods=['GET', 'POST'])
+def edit_nick():
+    if request.method == 'GET':
+        return render_template('edit.html', see=True)
+    u2n = request.form['nickname']
+    update_user(session['username'], u2n, "nick")
+    session['nickname'] = u2n
+    return redirect('/')

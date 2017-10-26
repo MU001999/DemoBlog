@@ -1,5 +1,30 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+<div class="row clearfix">
+    <div class="col-md-2 column">
+        <h3>
+            {{ session.get('nickname') }}<small>{{ session.get('username') }}</small>
+        </h3> <button onclick="location.href='/editnick'" type="button" class="btn btn-default">修改昵称</button>
+    </div>
+    <div class="col-md-6 column">
+        <h3>
+            我的文章
+        </h3>
+        {% for article in articles %}
+        <div class="page-header">
+            <a href="/articles/{{ article['order'] }}">
+                <h1>
+                    {{ article['title'] }}
+                    <small>{{ article['post_time'] }}</small>
+                </h1>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-4 column">
+        <button onclick="location.href='/articles/write'" type="button" class="btn btn-block btn-default">写文章</button>
+        <button onclick="location.href='/codes/paste'" type="button" class="btn btn-default btn-block">贴代码</button>
+    </div>
+</div>
 {% endblock %}

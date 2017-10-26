@@ -33,6 +33,16 @@ def add_user(username, password, nickname):
         raise False
 
 
+def update_user(username, u2n, info):
+    if info == "pwd":
+        users.update({"username": username}, {"$set": {"password": u2n}})
+    elif info == "nick":
+        global articles_sorted
+        users.update({"username": username}, {"$set": {"nickname": u2n}})
+        articles.update({"username": username}, {"$set": {"nickname": u2n}})
+        articles_sorted = articles.find().sort("order")
+
+
 # for codes
 def add_code(poster, syntax, content):
     try:
@@ -49,11 +59,11 @@ def get_code(order):
 
 
 # for articles
-def add_article(title, author, content, time_post):
+def add_article(title, author, content, time_post, username):
     global articles_sorted
     try:
         order = articles.find().count()
-        articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post})
+        articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post, 'username': username})
         articles_sorted = articles.find().sort("order")
         return order
     except:
@@ -68,3 +78,7 @@ def get_article(article_id):
 def get_articles(page_id):
     _ = articles_sorted.clone()
     return _[page_id*10: min(page_id*10+10, articles_sorted.count())]
+
+
+def get_articles_single_user(username):
+    return articles.find({'username': username}).sort('order')
