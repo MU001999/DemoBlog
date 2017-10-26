@@ -12,7 +12,7 @@
 
 ### 技术选型
 * Bootstrap
-* Nginx
+* Nginx + Gunicorn
 * Flask
 * MongoDB
 
