@@ -15,7 +15,9 @@ def login():
         ans = check(username, password)
         if ans:
             session['logged_in'] = True
-            session['username'], session['password'], session['nickname'] = username, password, ans
+            session['username'] = username
+            session['password'] = password
+            session['nickname'] = ans
             return redirect('/')
         return render_template('/users/login.html', sth_wrong=True)
     return render_template('/users/login.html', sth_wrong=False)
