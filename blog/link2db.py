@@ -8,6 +8,7 @@ db = conn.demoblog
 users = db.users
 codes = db.codes
 articles = db.articles
+posts = db.posts
 
 articles_sorted = articles.find().sort("order")
 
@@ -90,9 +91,17 @@ def del_articles_by_orders(orders):
 
 
 # for forum
-def add_post(title, lz, theme, content, time_post, username, plate):
-    pass
+def add_post(title, lz, theme, content, time_post, plate, username):
+    pass  # TODO: add post as {"title":title, "lz":lz...}
+
+
+def add_comment():
+    pass  # TODO: add comment and the comment has the same order with the post but have time_comment not time_post
+
+
+def get_post(order):
+    pass  # TODO: get the post as one floor and other floors as comments
 
 
 def get_posts_recently():
-    pass
+    pass  # TODO: get 10 posts recently

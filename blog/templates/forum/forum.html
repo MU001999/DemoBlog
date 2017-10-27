@@ -4,14 +4,16 @@
 
 <div class="page-header">
     <h1>
-        Jusot's Forum <span>:)</span>
+        Jusot's Forum
+        <span>:)</span>
     </h1>
 </div>
 <div class="row clearfix">
     <div class="col-md-2 column">
         <h3>
             {{ session.get('nickname') }}<small>{{ session.get('username') }}</small>
-        </h3> <button onclick="location.href='/editnick'" type="button" class="btn btn-default">修改昵称</button>
+        </h3>
+        <button onclick="location.href='/editnick'" type="button" class="btn btn-default">修改昵称</button>
     </div>
     <div class="col-md-4 column">
         <button onclick="location.href='/articles/write'" type="button" class="btn btn-block btn-default">写文章</button>
@@ -45,7 +47,7 @@
             <a href="/forum/post/{{ post['order'] }}">
                 <h1>
                     {{ post['title'] }}
-                    <small>{{ post['author'] }}</small>
+                    <small>{{ post['lz'] }}</small>
                 </h1>
             </a>
         </div>

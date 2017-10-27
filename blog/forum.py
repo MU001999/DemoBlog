@@ -16,9 +16,9 @@ def set_forum():
         return redirect('/login')
 
 
-@app.route('/forum/post/<int:order>')
+@app.route('/forum/post/<int:order>', methods=['GET', 'POST'])
 def set_post(order):
-    pass
+    pass  # TODO: implement the multi-users page and comment as POST method
 
 
 @app.route('/forum/posts/write', methods=['GET', 'POST'])
@@ -29,14 +29,13 @@ def write_post():
                 return render_template('/forum/postPaste.html')
         except:
             return redirect('/login')
-    title, lz, theme, content = request.form['title'], session['nickname'], request.form['theme'], request.form['content']
+    title, lz, theme, content, plate = request.form['title'], session['nickname'], request.form['theme'], request.form['content'], request.form['plate']
     username = session['username']
-    plate = request.form['plate']
     time_post = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    post_id = add_post(title, lz, theme, content, time_post, username, plate)
+    post_id = add_post(title, lz, theme, content, time_post, plate, username)
     return redirect('/posts/' + str(post_id))
 
 
 @app.route('/forum/plates/<name>')
 def set_plate(name):
-    pass
+    pass  # TODO: implement it like set_articles
