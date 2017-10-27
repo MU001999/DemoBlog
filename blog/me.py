@@ -11,6 +11,6 @@ def get_me():
         if session['logged_in']:
             _ = get_articles_single_user(session['username'])
             __ = get_articles_single_user(session['username'])
-            return render_template('me.html', articles=_, _=__)
+            return render_template('/users/me.html', articles=_, _=__)
     except:
         return redirect('/login')

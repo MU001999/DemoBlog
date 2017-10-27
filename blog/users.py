@@ -17,8 +17,8 @@ def login():
             session['logged_in'] = True
             session['username'], session['password'], session['nickname'] = username, password, ans
             return redirect('/')
-        return render_template('login.html', sth_wrong=True)
-    return render_template('login.html', sth_wrong=False)
+        return render_template('/users/login.html', sth_wrong=True)
+    return render_template('/users/login.html', sth_wrong=False)
 
 
 @app.route('/logout')
@@ -33,10 +33,10 @@ def logout():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
-        return render_template('signup.html', sth_wrong=False)
+        return render_template('/users/signup.html', sth_wrong=False)
 
     if check_exist(request.form['username']):
-        return render_template('/signup.html', sth_wrong=True)
+        return render_template('/users/signup.html', sth_wrong=True)
 
     if add_user(request.form['username'], request.form['password'], request.form['nickname']):
         session['logged_in'] = True
@@ -47,13 +47,13 @@ def signup():
 
         return redirect('/')
 
-    return render_template('signup.html', sth_wrong=True)
+    return render_template('/users/signup.html', sth_wrong=True)
 
 
 @app.route('/editpwd', methods=['GET', 'POST'])
 def edit_pwd():
     if request.method == 'GET':
-        return render_template('edit.html', see=False)
+        return render_template('/users/edit.html', see=False)
     u2n = request.form['password']
     update_user(session['username'], u2n, "pwd")
     session['password'] = u2n
@@ -63,7 +63,7 @@ def edit_pwd():
 @app.route('/editnick', methods=['GET', 'POST'])
 def edit_nick():
     if request.method == 'GET':
-        return render_template('edit.html', see=True)
+        return render_template('/users/edit.html', see=True)
     u2n = request.form['nickname']
     update_user(session['username'], u2n, "nick")
     session['nickname'] = u2n
