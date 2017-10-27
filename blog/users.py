@@ -28,6 +28,7 @@ def logout():
     session.pop('username', None)
     session.pop('password', None)
     session.pop('nickname', None)
+
     session['logged_in'] = False
     return redirect('/')
 
