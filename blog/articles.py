@@ -33,3 +33,11 @@ def set_articles(page_id=0):
     page_ids = range(max(0, min(page_id-2, articles.count()/10)), min(page_id+3, articles.count()/10)+1)
     _articles = get_articles(page_id)
     return render_template('articles.html', author="ALL AUTHORS", articles=_articles, pre=max(page_id-1, 0), page_ids=page_ids, next=min(articles.count(), page_id+1))
+
+
+@app.route('/del/articles', methods=['POST'])
+def del_articles():
+    orders = request.form.getlist('do_delete')
+    orders = map(lambda x: int(x), orders)
+    del_articles_by_orders(orders)
+    return redirect('/me')

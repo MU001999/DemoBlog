@@ -9,7 +9,8 @@ from blog.link2db import *
 def get_me():
     try:
         if session['logged_in']:
-            articles = get_articles_single_user(session['username'])
-            return render_template('me.html', articles=articles)
+            _ = get_articles_single_user(session['username'])
+            __ = get_articles_single_user(session['username'])
+            return render_template('me.html', articles=_, _=__)
     except:
         return redirect('/login')

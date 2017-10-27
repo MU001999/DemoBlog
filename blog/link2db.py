@@ -82,3 +82,8 @@ def get_articles(page_id):
 
 def get_articles_single_user(username):
     return articles.find({'username': username}).sort('order')
+
+
+def del_articles_by_orders(orders):
+    for order in orders:
+        articles.remove({"order": order})
