@@ -87,3 +87,12 @@ def get_articles_single_user(username):
 def del_articles_by_orders(orders):
     for order in orders:
         articles.remove({"order": order})
+
+
+# for forum
+def add_post(title, lz, theme, content, time_post, username, plate):
+    pass
+
+
+def get_posts_recently():
+    pass
