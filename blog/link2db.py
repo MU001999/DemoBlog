@@ -91,17 +91,31 @@ def del_articles_by_orders(orders):
 
 
 # for forum
-def add_post(title, lz, theme, content, time_post, plate, username):
-    pass  # TODO: add post as {"title":title, "lz":lz...}
+def add_post(title, lz, content, time_post, plate, username):
+    try:
+        order = posts.find({'type': 'post'}).count()
+        posts.insert_one({'order': order, 'type': 'post', 'title': title, 'lz': lz, 'content': content, 'time_post': time_post, 'plate': plate, 'username': username})
+        return order
+    except:
+        raise MemoryError
 
 
-def add_comment():
-    pass  # TODO: add comment and the comment has the same order with the post but have time_comment not time_post
+def add_comment(cz, content, username, time_comment, order):
+    corder = posts.find({'order': order, 'type': 'comment'}).count() + 1
+    posts.insert_one({'order': order, 'corder': corder, 'type': 'comment', 'cz': cz, 'content': content, 'username': username, 'time_comment': time_comment})
 
 
 def get_post(order):
-    pass  # TODO: get the post as one floor and other floors as comments
+    return posts.find_one({'type': 'post', 'order': order})
+
+
+def get_posts_by_plate(plate):
+    return posts.find({'plate': plate}).sort('order', pymongo.DESCENDING)
+
+
+def get_comments(order):
+    return posts.find({'type': 'comment', 'order': order}).sort('corder')
 
 
 def get_posts_recently():
-    pass  # TODO: get 10 posts recently
+    return posts.find({'type': 'post'}).sort('order', pymongo.DESCENDING)[:10]

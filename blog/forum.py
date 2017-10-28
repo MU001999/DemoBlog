@@ -8,27 +8,31 @@ from blog.link2db import *
 
 @app.route('/forum')
 def set_forum():
-    return render_template('/forum/forum.html', posts=get_posts_recently())\
+    return render_template('/forum/forum.html', posts=get_posts_recently(), name="Forum's Homepage")\
         if session.get('logged_in', False) else redirect('/login')
 
 
-@app.route('/forum/post/<int:order>', methods=['GET', 'POST'])
+@app.route('/forum/posts/<int:order>', methods=['GET', 'POST'])
 def set_post(order):
-    pass  # TODO: implement the multi-users page and comment as POST method
-
-
-@app.route('/forum/posts/write', methods=['GET', 'POST'])
-def write_post():
     if request.method == 'GET':
-        return render_template('/forum/postPaste.html') if session.get('logged_id', False) else redirect('/login')
+        post = get_post(order)
+        comments = get_comments(order)
+        return render_template('/forum/post.html', post=post, comments=comments, order=order)
+    else:
+        cz, content, username, time_comment = session['nickname'], request.form['content'], session['username'], time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        add_comment(cz, content, username, time_comment, order)
+        return redirect('/forum/posts/' + str(order))
 
-    title, lz, theme, content, plate = request.form['title'], session['nickname'], request.form['theme'], request.form['content'], request.form['plate']
+
+@app.route('/forum/posts/write', methods=['POST'])
+def write_post():
+    title, lz, content, plate = request.form['title'], session['nickname'], request.form['content'], request.form['plate']
     username = session['username']
     time_post = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    post_id = add_post(title, lz, theme, content, time_post, plate, username)
-    return redirect('/posts/' + str(post_id))
+    post_id = add_post(title, lz, content, time_post, plate, username)
+    return redirect('forum/posts/' + str(post_id))
 
 
 @app.route('/forum/plates/<name>')
 def set_plate(name):
-    pass  # TODO: implement it like set_articles
+    return render_template('/forum/forum.html', name=name, posts=get_posts_by_plate(name))
