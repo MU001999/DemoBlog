@@ -19,7 +19,9 @@ def login():
             session['password'] = password
             session['nickname'] = ans
             return redirect('/')
+
         return render_template('/users/login.html', sth_wrong=True)
+
     return render_template('/users/login.html', sth_wrong=False)
 
 
@@ -49,6 +51,7 @@ def signup():
         session['nickname'] = request.form['nickname']
 
         return redirect('/')
+
     return render_template('/users/signup.html', sth_wrong=True)
 
 
@@ -56,6 +59,7 @@ def signup():
 def edit_pwd():
     if request.method == 'GET':
         return render_template('/users/edit.html', see=False)
+
     u2n = request.form['password']
     update_user(session['username'], u2n, "pwd")
     session['password'] = u2n
@@ -66,6 +70,7 @@ def edit_pwd():
 def edit_nick():
     if request.method == 'GET':
         return render_template('/users/edit.html', see=True)
+
     u2n = request.form['nickname']
     update_user(session['username'], u2n, "nick")
     session['nickname'] = u2n

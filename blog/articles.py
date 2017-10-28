@@ -11,6 +11,7 @@ from blog.link2db import *
 def paste_article():
     if request.method == 'GET':
         return render_template('/articles/articlePaste.html') if session.get('logged_in', False) else redirect('/login')
+
     title, author, content = request.form['title'], session['nickname'], request.form['content']
     username = session['username']
     time_post = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())

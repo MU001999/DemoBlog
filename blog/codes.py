@@ -10,6 +10,7 @@ from blog.link2db import *
 def paste_code():
     if request.method == 'GET':
         return render_template('/codes/codePaste.html')
+
     poster, syntax, content = request.form['poster'], request.form['syntax'], request.form['content']
     return redirect('/codes/'+str(add_code(poster, syntax, content)))
 
