@@ -10,11 +10,7 @@ from blog.link2db import *
 @app.route('/articles/write', methods=['GET', 'POST'])
 def paste_article():
     if request.method == 'GET':
-        try:
-            if session['logged_in']:
-                return render_template('/articles/articlePaste.html')
-        except:
-            return redirect('/login')
+        return render_template('/articles/articlePaste.html') if session.get('logged_in', False) else redirect('/login')
     title, author, content = request.form['title'], session['nickname'], request.form['content']
     username = session['username']
     time_post = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())

@@ -7,10 +7,9 @@ from blog.link2db import *
 
 @app.route("/me")
 def get_me():
-    try:
-        if session['logged_in']:
-            _ = get_articles_single_user(session['username'])
-            __ = get_articles_single_user(session['username'])
-            return render_template('/users/me.html', articles=_, _=__)
-    except:
+    if session.get('logged_in', False):
+        _ = get_articles_single_user(session['username'])
+        __ = get_articles_single_user(session['username'])
+        return render_template('/users/me.html', articles=_, _=__)
+    else:
         return redirect('/login')
