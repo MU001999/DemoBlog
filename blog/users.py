@@ -49,7 +49,6 @@ def signup():
         session['nickname'] = request.form['nickname']
 
         return redirect('/')
-
     return render_template('/users/signup.html', sth_wrong=True)
 
 
