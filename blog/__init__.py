@@ -11,4 +11,4 @@ def hello():
     return render_template('index.html')
 
 
-from blog import users, codes, articles, me, forum
+from blog import articles, codes, forum, me, users
