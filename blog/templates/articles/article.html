@@ -4,15 +4,26 @@
 
 <div class="page-header">
 	<h1 class="text-center">
-		{{ title }}<small>{{ author }}</small>
+		{{ article['title'] }}<small>{{ article['author'] }}</small>
 	</h1>
 </div>
 
 <div class="jumbotron">
-	<h1>
-		{{ post_time }}
-	</h1>
-	{{ content|e }}
+	<h3>
+		{{ article['time_post'] }}
+	</h3>
+    <textarea id="oriContent" style="display:none;">{{ article['content']|e }}</textarea>
+    <div id="preview"> </div>
+    <script src="/static/js/showdown.min.js"></script>
+    <script type="text/javascript">
+      function convert(){
+        var text = document.getElementById("oriContent").value;
+        var converter = new showdown.Converter();
+        var html = converter.makeHtml(text);
+        document.getElementById("preview").innerHTML = html;
+      }
+      new convert();
+    </script>
 </div>
 
 {% endblock %}

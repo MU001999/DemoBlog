@@ -21,8 +21,8 @@ def paste_article():
 
 @app.route('/articles/<int:article_id>', methods=['GET', 'POST'])
 def set_article(article_id):
-    title, author, content, post_time = get_article(article_id)
-    return render_template('/articles/article.html', title=title, author=author, content=content, post_time=post_time)
+    article = get_article(article_id)
+    return render_template('/articles/article.html', article=article)
 
 
 @app.route('/articles/all/<int:page_id>')

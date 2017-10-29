@@ -77,12 +77,16 @@ def add_article(title, author, content, time_post, username):
 
 def get_article(article_id):
     article = articles.find_one({'order': article_id})
-    return article['title'], article['author'], article['content'], article['time_post']
+    return article
 
 
 def get_articles(page_id):
     _ = articles_sorted.clone()
     return _[page_id*10: min(page_id*10+10, articles_sorted.count())]
+
+
+def get_articles_recently():
+    return articles.find().sort('order', pymongo.DESCENDING)[:10]
 
 
 def get_articles_single_user(username):

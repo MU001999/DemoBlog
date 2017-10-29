@@ -9,7 +9,7 @@ from blog.link2db import *
 @app.route('/')
 def hello():
     pos = get_posts_recently()
-    arts = get_articles(0)
+    arts = get_articles_recently()
     return render_template('/index/index.html', posts=pos, articles=arts)
 
 
