@@ -79,10 +79,10 @@
         {% for article in _ %}
         <div class="page-header">
             <a href="/articles/{{ article['order'] }}">
-                <h1>
+                <h2>
                     {{ article['title'] }}
                     <small>{{ article['time_post'] }}</small>
-                </h1>
+                </h2>
             </a>
         </div>
         {% endfor %}

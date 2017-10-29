@@ -12,10 +12,10 @@
         {% for article in articles %}
         <div class="page-header">
             <a href="/articles/{{ article['order'] }}">
-                <h1>
+                <h2>
                     {{ article['title'] }}
                     <small>{{ article['author'] }}</small>
-                </h1>
+                </h2>
             </a>
         </div>
         {% endfor %}

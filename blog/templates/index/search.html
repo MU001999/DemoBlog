@@ -3,16 +3,16 @@
 {% block content %}
 搜索结果
 <div class="row clearfix">
-    <h2>
+    <h3>
         用户
-    </h2>
+    </h3>
     <div class="col-md-12 column">
         {% for user in users %}
         <div class="page-header">
             <a href="/users/{{ user['username'] }}">
-                <h1>
+                <h2>
                     {{ user['nickname'] }}
-                </h1>
+                </h2>
             </a>
         </div>
         {% endfor %}
@@ -20,17 +20,17 @@
 </div>
 
 <div class="row clearfix">
-    <h2>
+    <h3>
         文章
-    </h2>
+    </h3>
     <div class="col-md-12 column">
         {% for article in articles %}
         <div class="page-header">
             <a href="/articles/{{ article['order'] }}">
-                <h1>
+                <h2>
                     {{ article['title'] }}
                     <small>{{ article['author'] }}</small>
-                </h1>
+                </h2>
             </a>
         </div>
         {% endfor %}
@@ -38,18 +38,18 @@
 </div>
 
 <div class="row clearfix">
-    <h2>
+    <h3>
         帖子
-    </h2>
+    </h3>
     <div class="col-md-12 column">
         {% for post in posts %}
 
         <div class="page-header">
             <a href="/forum/posts/{{ post['order'] }}">
-                <h1>
+                <h2>
                     {{ post['title'] }}
                     <small>{{ post['lz'] }}</small>
-                </h1>
+                </h2>
             </a>
         </div>
 
@@ -58,18 +58,18 @@
 </div>
 
 <div class="row clearfix">
-    <h2>
+    <h3>
         代码
-    </h2>
+    </h3>
     <div class="col-md-12 column">
         {% for code in codes %}
 
         <div class="page-header">
             <a href="/codes/{{ code['order'] }}">
-                <h1>
+                <h2>
                     {{ post['poster'] }}
                     <small>{{ post['syntax'] }}</small>
-                </h1>
+                </h2>
             </a>
         </div>
 
