@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <h3>
+            {{ user['nickname'] }}<small>{{ user['username'] }}</small>
+        </h3>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-6 column">
+        <h3>
+            TA的文章
+        </h3>
+        {% for article in articles %}
+        <div class="page-header">
+            <a href="/articles/{{ article['order'] }}">
+                <h1>
+                    {{ article['title'] }}
+                    <small>{{ article['time_post'] }}</small>
+                </h1>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-6 column">
+        <h3>
+            TA的帖子
+        </h3>
+        {% for post in posts %}
+        <div class="page-header">
+            <a href="/forum/posts/{{ post['order'] }}">
+                <h1>
+                    {{ post['title'] }}
+                    <small>{{ post['post_time'] }}</small>
+                </h1>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -75,3 +75,20 @@ def edit_nick():
     update_user(session['username'], u2n, "nick")
     session['nickname'] = u2n
     return redirect('/')
+
+
+@app.route("/me")
+def set_me():
+    if session.get('logged_in', False):
+        _ = get_articles_single_user(session['username'])
+        __ = get_articles_single_user(session['username'])
+        return render_template('/users/me.html', articles=_, _=__)
+    else:
+        return redirect('/login')
+
+
+@app.route('/users/<username>')
+def set_other(username):
+    user = get_user(username)
+    pos, arts = search_by_username(username)
+    return render_template('/users/other.html', user=user, posts=pos, articles=arts)

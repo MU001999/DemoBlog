@@ -44,13 +44,17 @@ def update_user(username, u2n, info):
         articles_sorted = articles.find().sort("order")
 
 
+def get_user(username):
+    return users.find_one({'username': username})
+
+
 # for codes
 def add_code(poster, syntax, content):
     try:
         order = codes.find().count()
         codes.insert_one({'poster': poster, 'syntax': syntax, 'content': content, 'order': order})
         return order
-    except:
+    except MemoryError:
         raise MemoryError
 
 
@@ -67,7 +71,7 @@ def add_article(title, author, content, time_post, username):
         articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post, 'username': username})
         articles_sorted = articles.find().sort("order")
         return order
-    except:
+    except MemoryError:
         raise MemoryError
 
 
@@ -96,7 +100,7 @@ def add_post(title, lz, content, time_post, plate, username):
         order = posts.find({'type': 'post'}).count()
         posts.insert_one({'order': order, 'type': 'post', 'title': title, 'lz': lz, 'content': content, 'time_post': time_post, 'plate': plate, 'username': username})
         return order
-    except:
+    except MemoryError:
         raise MemoryError
 
 
@@ -119,3 +123,18 @@ def get_comments(order):
 
 def get_posts_recently():
     return posts.find({'type': 'post'}).sort('order', pymongo.DESCENDING)[:10]
+
+
+# for search
+def search_by_target(target):
+    us = users.find({"nickname": {"$regex": r"(.)*"+target+r"(.)*"}})
+    pos = posts.find({"title": {"$regex": r"(.)*"+target+r"(.)*"}})
+    cods = codes.find({"poster": {"$regex": r"(.)*"+target+r"(.)*"}})
+    arts = articles.find({"title": {"$regex": r"(.)*"+target+r"(.)*"}})
+    return us, pos, cods, arts
+
+
+def search_by_username(username):
+    pos = posts.find({'username': username})
+    arts = articles.find({'username': username})
+    return pos, arts
