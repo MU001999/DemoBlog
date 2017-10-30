@@ -1,24 +1,34 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
 <div class="row clearfix">
-    <div class="col-md-12 column">
-        <form method="post" action="/articles/write">
-            <input class="form-control" name="title" placeholder="Input your title">
-            <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"
-                      rows="6" cols="60">Type **Markdown** here.</textarea>
-            <div id="preview"> </div>
-            <script src="/static/js/showdown.min.js"></script>
-            <script type="text/javascript">
-      function convert(){
-        var text = document.getElementById("oriContent").value;
-        var converter = new showdown.Converter();
-        var html = converter.makeHtml(text);
-        document.getElementById("preview").innerHTML = html;
-    }
-    </script>
-            <button class="btn btn-default" type="submit">发表</button>
-        </form>
-    </div>
+    <form method="post" action="/articles/write">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <input class="form-control" name="title" placeholder="Input your title">
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"
+                              rows="6" cols="60">Type **Markdown** here.</textarea>
+                </div>
+                <div class="col-md-6 column">
+                    <div id="preview"> </div>
+                    <script src="/static/js/showdown.min.js"></script>
+                    <script type="text/javascript">
+                    function convert(){
+                        var text = document.getElementById("oriContent").value;
+                        var converter = new showdown.Converter();
+                        var html = converter.makeHtml(text);
+                        document.getElementById("preview").innerHTML = html;
+                    }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

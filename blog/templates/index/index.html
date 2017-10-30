@@ -11,32 +11,32 @@
 
 <div class="row clearfix">
     <div class="col-md-6 column">
-        <h3>
+        <h4>
             最近文章
-        </h3>
+        </h4>
         {% for article in articles %}
         <div class="page-header">
             <a href="/articles/{{ article['order'] }}">
-                <h2>
+                <h3>
                     {{ article['title'] }}
                     <small>{{ article['author'] }}</small>
-                </h2>
+                </h3>
             </a>
         </div>
         {% endfor %}
     </div>
     <div class="col-md-6 column">
-        <h3>
+        <h4>
             最近帖子
-        </h3>
+        </h4>
         {% for post in posts %}
 
         <div class="page-header">
             <a href="/forum/posts/{{ post['order'] }}">
-                <h2>
+                <h3>
                     {{ post['title'] }}
                     <small>{{ post['lz'] }}</small>
-                </h2>
+                </h3>
             </a>
         </div>
 
