@@ -7,13 +7,19 @@
         <div class="col-md-12 column">
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <input class="form-control" name="title" placeholder="Input your title">
+                    <input class="form-control" name="title" placeholder="文章标题">
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <div class="row clearfix">
                 <div class="col-md-6 column">
                     <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"
-                              rows="6" cols="60">Type **Markdown** here.</textarea>
+                              rows="20" cols="60">使用MarkDown语法编辑您的文章</textarea>
                 </div>
                 <div class="col-md-6 column">
                     <div id="preview"> </div>
@@ -26,6 +32,15 @@
                         document.getElementById("preview").innerHTML = html;
                     }
                     </script>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-4 column">
+                </div>
+                <div class="col-md-4 column">
+                    <button class="btn btn-default" type="submit">发表</button>
+                </div>
+                <div class="col-md-4 column">
                 </div>
             </div>
         </div>
