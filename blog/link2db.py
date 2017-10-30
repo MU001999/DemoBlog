@@ -10,7 +10,7 @@ codes = db.codes
 articles = db.articles
 posts = db.posts
 
-articles_sorted = articles.find().sort("order")
+articles_sorted = articles.find().sort("order", pymongo.DESCENDING)
 
 
 # for users
@@ -90,7 +90,7 @@ def get_articles_recently():
 
 
 def get_articles_single_user(username):
-    return articles.find({'username': username}).sort('order')
+    return articles.find({'username': username}).sort('order', pymongo.DESCENDING)
 
 
 def del_articles_by_orders(orders):
