@@ -69,7 +69,7 @@ def add_article(title, author, content, time_post, username):
     try:
         order = articles.find().count()
         articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post, 'username': username})
-        articles_sorted = articles.find().sort("order")
+        articles_sorted = articles.find().sort("order", pymongo.DESCENDING)
         return order
     except MemoryError:
         raise MemoryError
