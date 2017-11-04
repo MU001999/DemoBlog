@@ -15,10 +15,7 @@ articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCE
 
 # common
 def get_comments(order, col):
-    if col == "posts":
-        return posts.find({'type': 'comment', 'order': order}).sort('corder')
-    elif col == "articles":
-        return articles.find({'type': 'comment', 'order': order}).sort('corder')
+    return eval(col).find({'type': 'comment', 'order': order}).sort('corder')
 
 
 # for users
