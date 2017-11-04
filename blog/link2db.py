@@ -10,7 +10,15 @@ codes = db.codes
 articles = db.articles
 posts = db.posts
 
-articles_sorted = articles.find().sort("order", pymongo.DESCENDING)
+articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
+
+
+# common
+def get_comments(order, col):
+    if col == "posts":
+        return posts.find({'type': 'comment', 'order': order}).sort('corder')
+    elif col == "articles":
+        return articles.find({'type': 'comment', 'order': order}).sort('corder')
 
 
 # for users
@@ -41,7 +49,8 @@ def update_user(username, u2n, info):
         global articles_sorted
         users.update({"username": username}, {"$set": {"nickname": u2n}})
         articles.update({"username": username}, {"$set": {"nickname": u2n}})
-        articles_sorted = articles.find().sort("order")
+        posts.update({"username": username}, {"$set": {"nickname": u2n}})
+        articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
 
 
 def get_user(username):
@@ -68,15 +77,20 @@ def add_article(title, author, content, time_post, username):
     global articles_sorted
     try:
         order = articles.find().count()
-        articles.insert_one({'title': title, 'author': author, 'content': content, 'order': order, 'time_post': time_post, 'username': username})
-        articles_sorted = articles.find().sort("order", pymongo.DESCENDING)
+        articles.insert_one({'order': order, 'type': 'article', 'title': title, 'author': author, 'content': content, 'time_post': time_post, 'username': username})
+        articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
         return order
     except MemoryError:
         raise MemoryError
 
 
+def add_comment_for_article(cz, content, username, time_comment, order):
+    corder = articles.find({'order': order, 'type': 'comment'}).count() + 1
+    articles.insert_one({'order': order, 'corder': corder, 'type': 'comment', 'cz': cz, 'content': content, 'username': username, 'time_comment': time_comment})
+
+
 def get_article(article_id):
-    article = articles.find_one({'order': article_id})
+    article = articles.find_one({'order': article_id, "type": "article"})
     return article
 
 
@@ -86,11 +100,11 @@ def get_articles(page_id):
 
 
 def get_articles_recently():
-    return articles.find().sort('order', pymongo.DESCENDING)[:10]
+    return articles.find({"type": "article"}).sort('order', pymongo.DESCENDING)[:10]
 
 
 def get_articles_single_user(username):
-    return articles.find({'username': username}).sort('order', pymongo.DESCENDING)
+    return articles.find({'username': username, 'type': 'article'}).sort('order', pymongo.DESCENDING)
 
 
 def del_articles_by_orders(orders):
@@ -108,7 +122,7 @@ def add_post(title, lz, content, time_post, plate, username):
         raise MemoryError
 
 
-def add_comment(cz, content, username, time_comment, order):
+def add_comment_for_post(cz, content, username, time_comment, order):
     corder = posts.find({'order': order, 'type': 'comment'}).count() + 1
     posts.insert_one({'order': order, 'corder': corder, 'type': 'comment', 'cz': cz, 'content': content, 'username': username, 'time_comment': time_comment})
 
@@ -119,10 +133,6 @@ def get_post(order):
 
 def get_posts_by_plate(plate):
     return posts.find({'plate': plate}).sort('order', pymongo.DESCENDING)
-
-
-def get_comments(order):
-    return posts.find({'type': 'comment', 'order': order}).sort('corder')
 
 
 def get_posts_recently():

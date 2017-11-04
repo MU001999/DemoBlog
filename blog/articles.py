@@ -19,10 +19,17 @@ def paste_article():
     return redirect('/articles/' + str(post_id))
 
 
-@app.route('/articles/<int:article_id>', methods=['GET', 'POST'])
-def set_article(article_id):
-    article = get_article(article_id)
-    return render_template('/articles/article.html', article=article)
+@app.route('/articles/<int:order>', methods=['GET', 'POST'])
+def set_article(order):
+    if request.method == 'GET':
+        article = get_article(order)
+        comments = get_comments(order, "articles")
+        return render_template('/articles/article.html', article=article, comments=comments)
+    if not session.get('logged_in', False):
+        return redirect('/login')
+    cz, content, username, time_comment = session['nickname'], request.form['content'], session['username'], time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    add_comment_for_article(cz, content, username, time_comment, order)
+    return redirect('/articles/' + str(order))
 
 
 @app.route('/articles/all/<int:page_id>')

@@ -16,12 +16,11 @@ def set_forum():
 def set_post(order):
     if request.method == 'GET':
         post = get_post(order)
-        comments = get_comments(order)
-        return render_template('/forum/post.html', post=post, comments=comments, order=order)
-    else:
-        cz, content, username, time_comment = session['nickname'], request.form['content'], session['username'], time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        add_comment(cz, content, username, time_comment, order)
-        return redirect('/forum/posts/' + str(order))
+        comments = get_comments(order, "posts")
+        return render_template('/forum/post.html', post=post, comments=comments)
+    cz, content, username, time_comment = session['nickname'], request.form['content'], session['username'], time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    add_comment_for_post(cz, content, username, time_comment, order)
+    return redirect('/forum/posts/' + str(order))
 
 
 @app.route('/forum/posts/write', methods=['POST'])

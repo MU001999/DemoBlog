@@ -2,28 +2,61 @@
 
 {% block content %}
 
-<div class="page-header">
-	<h1 class="text-center">
-		{{ article['title'] }}    <small>{{ article['author'] }}</small>
-	</h1>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1 class="text-center">
+                {{ article['title'] }}    <small>{{ article['author'] }}</small>
+            </h1>
+        </div>
+        <h3 class="text-center">
+            {{ article['time_post'] }}
+        </h3>
+    </div>
 </div>
-<h3 class="text-center">
-	{{ article['time_post'] }}
-</h3>
-<div class="jumbotron">
-
-	<textarea id="oriContent" style="display:none;">{{ article['content']|e }}</textarea>
-	<div id="preview"> </div>
-	<script src="/static/js/showdown.min.js"></script>
-	<script type="text/javascript">
-      function convert(){
-        var text = document.getElementById("oriContent").value;
-        var converter = new showdown.Converter();
-        var html = converter.makeHtml(text);
-        document.getElementById("preview").innerHTML = html;
-      }
-      new convert();
-    </script>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="jumbotron">
+            <textarea id="oriContent" style="display:none;">{{ article['content']|e }}</textarea>
+            <div id="preview"> </div>
+            <script src="/static/js/showdown.min.js"></script>
+            <script type="text/javascript">
+                function convert(){
+                    var text = document.getElementById("oriContent").value;
+                    var converter = new showdown.Converter();
+                    var html = converter.makeHtml(text);
+                    document.getElementById("preview").innerHTML = html;
+                }
+                new convert();
+            </script>
+        </div>
+    </div>
 </div>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <form role="form" action="/articles/{{ article['order'] }}" method="post">
+            <textarea class="form-control" rows="3" name="content">发表评论</textarea>
+            <button type="submit" class="btn btn-default">发表</button>
+        </form>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <h3>
+            评论
+        </h3>
+        {% for comment in comments %}
+        {{ comment['corder'] }}楼
+        <blockquote>
+            <p>
+                {{ comment['content'] }}
+            </p>
+            <small>
+                {{ comment['cz'] }} on {{ comment['time_comment'] }}
+            </small>
+        </blockquote>
 
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
