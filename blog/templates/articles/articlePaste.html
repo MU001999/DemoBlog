@@ -6,8 +6,14 @@
     <form method="post" action="/articles/write">
         <div class="col-md-12 column">
             <div class="row clearfix">
-                <div class="col-md-12 column">
+                <div class="col-md-6 column">
                     <input class="form-control" name="title" placeholder="文章标题">
+                </div>
+                <div class="col-md-4 column">
+                    <input class="form-control" name="labels" placeholder="标签(;分割)">
+                </div>
+                <div class="col-md-2 column">
+                    <button class="btn btn-default" type="submit">发表</button>
                 </div>
             </div>
             <br>
@@ -27,16 +33,6 @@
                         document.getElementById("preview").innerHTML = html;
                     }
                     </script>
-                </div>
-            </div>
-            <br>
-            <div class="row clearfix">
-                <div class="col-md-2 column">
-                </div>
-                <div class="col-md-4 column">
-                    <button class="btn btn-default" type="submit">发表</button>
-                </div>
-                <div class="col-md-6 column">
                 </div>
             </div>
         </div>

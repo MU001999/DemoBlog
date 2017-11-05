@@ -70,11 +70,18 @@ def get_code(order):
 
 
 # for articles
-def add_article(title, author, content, time_post, username):
+def add_article(title, author, content, time_post, username, labels):
     global articles_sorted
     try:
         order = articles.find().count()
-        articles.insert_one({'order': order, 'type': 'article', 'title': title, 'author': author, 'content': content, 'time_post': time_post, 'username': username})
+        articles.insert_one({'order': order,
+                             'type': 'article',
+                             'title': title,
+                             'author': author,
+                             'content': content,
+                             'time_post': time_post,
+                             'username': username,
+                             'labels': labels})
         articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
         return order
     except MemoryError:

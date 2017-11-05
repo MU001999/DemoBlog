@@ -9,6 +9,13 @@
                 {{ article['title'] }}    <small>{{ article['author'] }}</small>
             </h1>
         </div>
+        <ul class="list-inline text-center">
+            {% for label in article['labels'] %}
+            <li>
+                <span class="label label-primary">{{ label }}</span>
+            </li>
+            {% endfor %}
+        </ul>
         <h3 class="text-center">
             {{ article['time_post'] }}
         </h3>

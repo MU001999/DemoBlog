@@ -13,9 +13,10 @@ def paste_article():
         return render_template('/articles/articlePaste.html') if session.get('logged_in', False) else redirect('/login')
 
     title, author, content = request.form['title'], session['nickname'], request.form['content']
+    labels = request.form['labels'].split(";")
     username = session['username']
     time_post = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    post_id = add_article(title, author, content, time_post, username)
+    post_id = add_article(title, author, content, time_post, username, labels)
     return redirect('/articles/' + str(post_id))
 
 
