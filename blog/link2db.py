@@ -45,8 +45,8 @@ def update_user(username, u2n, info):
     elif info == "nick":
         global articles_sorted
         users.update({"username": username}, {"$set": {"nickname": u2n}})
-        articles.update({"username": username}, {"$set": {"nickname": u2n}})
-        posts.update({"username": username}, {"$set": {"nickname": u2n}})
+        articles.update({"username": username}, {"$set": {"author": u2n}})
+        posts.update({"username": username}, {"$set": {"lz": u2n}})
         articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
 
 
