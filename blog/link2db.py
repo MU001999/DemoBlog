@@ -88,6 +88,12 @@ def add_article(title, author, content, time_post, username, labels):
         raise MemoryError
 
 
+def update_article(order, title, content, labels):
+    global articles_sorted
+    articles.update({"order": order}, {"$set": {"title": title, "content": content, "labels": labels}}, multi=True)
+    articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
+
+
 def add_comment_for_article(cz, content, username, time_comment, order):
     corder = articles.find({'order': order, 'type': 'comment'}).count() + 1
     articles.insert_one({'order': order, 'corder': corder, 'type': 'comment', 'cz': cz, 'content': content, 'username': username, 'time_comment': time_comment})

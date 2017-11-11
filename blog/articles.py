@@ -20,12 +20,30 @@ def paste_article():
     return redirect('/articles/' + str(post_id))
 
 
+@app.route('/articles/edit/<int:order>', methods=['GET', 'POST'])
+def edit_article(order):
+    if not session.get('logged_in', False):
+        return redirect('/login')
+    if request.method == 'GET':
+        article = get_article(order)
+        if session['username'] != article['username']:
+            return redirect('/')
+        return render_template('/articles/edit.html', article=article, labels=';'.join(article['labels']))
+    title, content, labels = request.form['title'], request.form['content'], request.form['labels'].split(";")
+    update_article(order, title, content, labels)
+    return redirect('/articles/' + str(order))
+
+
+
 @app.route('/articles/<int:order>', methods=['GET', 'POST'])
 def set_article(order):
     if request.method == 'GET':
         article = get_article(order)
         comments = get_comments(order, "articles")
-        return render_template('/articles/article.html', article=article, comments=comments)
+        return render_template('/articles/article.html',
+                               article=article,
+                               comments=comments,
+                               edit=(session.get('username', None) == article['username']))
     if not session.get('logged_in', False):
         return redirect('/login')
     cz, content, username, time_comment = session['nickname'], request.form['content'], session['username'], time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())

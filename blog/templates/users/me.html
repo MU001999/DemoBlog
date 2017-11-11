@@ -84,6 +84,7 @@
                     <small>{{ article['time_post'] }}</small>
                 </h3>
             </a>
+            <button onclick="location.href='/articles/edit/{{ article['order'] }}'" type="button" class="btn btn-block btn-default">修改文章</button>
         </div>
         {% endfor %}
     </div>

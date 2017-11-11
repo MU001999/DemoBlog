@@ -19,6 +19,9 @@
         <h3 class="text-center">
             {{ article['time_post'] }}
         </h3>
+        {% if edit %}
+        <button onclick="location.href='/articles/edit/{{ article['order'] }}'" type="button" class="btn btn-block btn-default">修改文章</button>
+        {% endif %}
     </div>
 </div>
 <div class="row clearfix">

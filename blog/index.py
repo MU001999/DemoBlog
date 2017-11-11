@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 
 
-from flask import render_template, redirect, request, session
+import os
+from flask import render_template, request, send_from_directory
 from blog import app
 from blog.link2db import *
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'imgs'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/')
