@@ -6,4 +6,4 @@ from flask import Flask
 app = Flask(__name__)
 
 
-from blog import articles, codes, forum, index, users
+from blog import articles, chat, codes, forum, index, play, users
