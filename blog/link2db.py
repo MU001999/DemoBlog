@@ -90,7 +90,7 @@ def add_article(title, author, content, time_post, username, labels):
 
 def update_article(order, title, content, labels):
     global articles_sorted
-    articles.update({"order": order}, {"$set": {"title": title, "content": content, "labels": labels}}, multi=True)
+    articles.update({"order": order, "type": "article"}, {"$set": {"title": title, "content": content, "labels": labels}})
     articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
 
 
