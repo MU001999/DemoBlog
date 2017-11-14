@@ -34,7 +34,6 @@ def edit_article(order):
     return redirect('/articles/' + str(order))
 
 
-
 @app.route('/articles/<int:order>', methods=['GET', 'POST'])
 def set_article(order):
     if request.method == 'GET':
