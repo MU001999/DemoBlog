@@ -25,6 +25,7 @@
     </h3>
     <div class="col-md-12 column">
         {% for article in articles %}
+        {% if article['completed'] %}
         <div class="page-header">
             <a href="/articles/{{ article['order'] }}">
                 <h2>
@@ -33,6 +34,7 @@
                 </h2>
             </a>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

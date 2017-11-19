@@ -6,7 +6,12 @@
     <div class="col-md-12 column">
         <div class="page-header">
             <h1 class="text-center">
-                {{ article['title'] }}    <small>{{ article['author'] }}</small>
+                {% if article['completed'] %}
+                {{ article['title'] }}
+                {% else %}
+                [草稿]{{ article['title'] }}
+                {% endif %}
+                <small>{{ article['author'] }}</small>
             </h1>
         </div>
         <ul class="list-inline text-center">

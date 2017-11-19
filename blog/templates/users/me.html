@@ -59,9 +59,21 @@
 
                             <ul>
                                 {% for article in articles %}
+
+                                {% if article['completed'] %}
+
                                 <li>
                                     <input type="checkbox" name="do_delete" value="{{ article['order'] }}"> {{ article['title'] }}
                                 </li>
+
+                                {% else %}
+
+                                <li>
+                                    <input type="checkbox" name="do_delete" value="{{ article['order'] }}"> [草稿]{{ article['title'] }}
+                                </li>
+
+                                {% endif %}
+
                                 {% endfor %}
                             </ul>
 
@@ -78,12 +90,25 @@
         </div>
         {% for article in _ %}
         <div class="page-header">
+            {% if article['completed'] %}
+
             <a href="/articles/{{ article['order'] }}">
                 <h3>
                     {{ article['title'] }}
                     <small>{{ article['time_post'] }}</small>
                 </h3>
             </a>
+
+            {% else %}
+
+            <a href="/articles/{{ article['order'] }}">
+                <h3>
+                    [草稿]{{ article['title'] }}
+                    <small>{{ article['time_post'] }}</small>
+                </h3>
+            </a>
+
+            {% endif %}
             <button onclick="location.href='/articles/edit/{{ article['order'] }}'" type="button" class="btn btn-block btn-default">修改文章</button>
         </div>
         {% endfor %}

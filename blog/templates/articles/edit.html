@@ -2,25 +2,31 @@
 
 {% block content %}
 
+{% if edit %}
 <div class="row clearfix">
     <form method="post" action="/articles/edit/{{ article['order'] }}">
         <div class="col-md-12 column">
             <div class="row clearfix">
                 <div class="col-md-6 column">
-                    <input class="form-control" name="title" value="{{ article['title'] }}">
+                    <input class="form-control"
+                           name="title"
+                           value="{{ article['title'] }}">
                 </div>
                 <div class="col-md-4 column">
-                    <input class="form-control" name="labels" placeholder="标签(;分割)" value="{{ labels }}">
+                    <input class="form-control"
+                           name="labels"
+                           placeholder="标签(;分割)"
+                           value="{{ labels }}">
                 </div>
                 <div class="col-md-2 column">
-                    <button class="btn btn-default" type="submit">修改</button>
+                    <button class="btn btn-default" type="submit" name="completed" value="0">存为草稿</button>
+                    <button class="btn btn-default" type="submit" name="completed" value="1">发表</button>
                 </div>
             </div>
             <br>
             <div class="row clearfix">
                 <div class="col-md-6 column">
-                    <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"
-                              rows="20" cols="60">{{ article['content']|safe }}</textarea>
+                    <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"rows="20" cols="60">{{ article['content']|safe }}</textarea>
                 </div>
                 <div class="col-md-6 column">
                     <div id="preview"> </div>
@@ -38,4 +44,51 @@
         </div>
     </form>
 </div>
+
+{% else %}
+
+<div class="row clearfix">
+    <form method="post" action="/articles/write">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <input class="form-control"
+                           name="title"
+                           placeholder="文章标题">
+                </div>
+                <div class="col-md-4 column">
+                    <input class="form-control"
+                           name="labels"
+                           placeholder="标签(;分割)">
+                </div>
+                <div class="col-md-2 column">
+                    <button class="btn btn-default" type="submit" name="completed" value="0">存为草稿</button>
+                    <button class="btn btn-default" type="submit" name="completed" value="1">发表</button>
+                </div>
+            </div>
+            <br>
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"rows="20" cols="60">使用MarkDown语法编辑您的文章</textarea>
+                </div>
+                <div class="col-md-6 column">
+                    <div id="preview"> </div>
+                    <script src="/static/js/showdown.min.js"></script>
+                    <script type="text/javascript">
+                    function convert(){
+                        var text = document.getElementById("oriContent").value;
+                        var converter = new showdown.Converter();
+                        var html = converter.makeHtml(text);
+                        document.getElementById("preview").innerHTML = html;
+                    }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endif %}
+
 {% endblock %}
+
