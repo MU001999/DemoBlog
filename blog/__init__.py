@@ -9,4 +9,4 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 
-from blog import articles, chat, codes, forum, index, play, users
+from blog import articles, chat, codes, forum, index, users
