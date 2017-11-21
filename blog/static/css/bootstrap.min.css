@@ -9,4 +9,6 @@
 }
 body {
     padding-top: 70px;
+    background-image: url('/static/imgs/background.jpg');
+    background-size: 100%;
 }
