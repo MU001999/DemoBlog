@@ -112,7 +112,7 @@ def get_articles(page_id):
 
 
 def get_articles_recently():
-    return articles.find({"type": "article"}).sort('order', pymongo.DESCENDING)[:10]
+    return articles.find({"type": "article"}).sort('order', pymongo.DESCENDING)[:8]
 
 
 def get_articles_single_user(username):
@@ -148,7 +148,7 @@ def get_posts_by_plate(plate):
 
 
 def get_posts_recently():
-    return posts.find({'type': 'post'}).sort('order', pymongo.DESCENDING)[:10]
+    return posts.find({'type': 'post'}).sort('order', pymongo.DESCENDING)[:8]
 
 
 # for search
