@@ -10,5 +10,8 @@
 body {
     padding-top: 70px;
     background-image: url('/static/imgs/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: 100%;
 }
