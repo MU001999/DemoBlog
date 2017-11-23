@@ -4,17 +4,24 @@
 
 <div class="row clearfix">
 
-    <div class="col-md-6 column">
+    <div class="col-md-4 column">
         <h3>
-            {{ session.get('nickname') }}<small>{{ session.get('username') }}</small>
+            {{ session.get('nickname') }}<small>    {{ session.get('username') }}</small>
         </h3>
-        <button onclick="location.href='/editnick'" type="button" class="btn btn-default">修改昵称</button>
-    </div>
-
-    <div class="col-md-6 column">
-        <button onclick="location.href='/articles/write'" type="button" class="btn btn-block btn-default">写文章</button>
-        <a id="modal-246585" href="#modal-container-246585" role="button" class="btn btn-block btn-default" data-toggle="modal">发帖子</a>
-        <button onclick="location.href='/codes/paste'" type="button" class="btn btn-default btn-block">贴代码</button>
+        <ul class="list-inline">
+            <li>
+                <button onclick="location.href='/editnick'" type="button" class="btn btn-default">修改昵称</button>
+            </li>
+            <li>
+                <button onclick="location.href='/articles/write'" type="button" class="btn btn-default">写文章</button>
+            </li>
+            <li>
+                <a id="modal-246585" href="#modal-container-246585" role="button" class="btn btn-block btn-default" data-toggle="modal">发帖子</a>
+            </li>
+            <li>
+                <button onclick="location.href='/codes/paste'" type="button" class="btn btn-default btn-block">贴代码</button>
+            </li>
+        </ul>
     </div>
 
     <div class="modal fade" id="modal-container-246585" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
