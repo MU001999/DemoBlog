@@ -11,7 +11,49 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/default.css" rel="stylesheet">
     <script src="/static/js/highlight.pack.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+        function login()
+        {
+            username = $("#username").val();
+            password = $("#password").val();
+            var formData = new FormData();
+            formData.append("username", username);
+            formData.append("password", password);
+            $.ajax({
+                url: '/login',
+                data: formData,
+                type: "POST",
+                contentType: false,
+                async: false,
+                processData: false,
+                success: function(res){
+                    if (res == "success"){
+                        var s = new String(window.location.href);
+                        if (s.indexOf("/login")==-1 && s.indexOf("/signup")==-1){
+                            location.reload();
+                        }
+                        else{
+                            window.location.href="/";
+                        }
+                    }
+                    else if (res == "username"){
+                        alert("用户名不存在");
+                    }
+                    else if (res == "password"){
+                        alert("密码错误(用户名存在)");
+                    }
+                    else{
+                        alert("未知错误");
+                    }
+                },
+                fail: function(){
+                    alert("未知错误");
+                }
+            });
+        };
+    </script>
 </head>
 
 <body>
@@ -57,7 +99,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if not session.logged_in %}
                 <li>
-                    <a href="/login">登录</a>
+                    <a id="modal-123456" href="#modal-container-123456" data-toggle="modal">登录</a>
                 </li>
                 <li>
                     <a href="/signup">免费注册</a>
@@ -89,6 +131,37 @@
     <div>
         {% block content %}{% endblock %}
     </div>
+    <div class="modal fade" id="modal-container-123456" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Login
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">用户名</span>
+                        <input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
+                    </div>
+                    <br>
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">密　码</span>
+                        <input id="password" name="password" type="password" class="form-control">
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='/signup'">注册</button>
+                    <button type="button" onclick="login()" class="btn btn-primary">登录</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>

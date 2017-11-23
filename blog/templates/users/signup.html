@@ -2,27 +2,61 @@
 
 {% block content %}
 
+<script>
+    function signup()
+    {
+        nickname = $("#nickname").val();
+        username = $("#username").val();
+        password = $("#password").val();
+        var formData = new FormData();
+        formData.append("nickname", nickname);
+        formData.append("username", username);
+        formData.append("password", password);
+        $.ajax({
+            url: '/signup',
+            data: formData,
+            type: "POST",
+            contentType: false,
+            async: false,
+            processData: false,
+            success: function(res){
+                if (res == "success"){
+                    var s = new String(window.location.href);
+                    if (s.indexOf("/signup")==-1){
+                        location.reload();
+                    }
+                    else{
+                        window.location.href="/";
+                    }
+                }
+                else{
+                    alert("用户名已存在");
+                }
+            },
+            fail: function(){
+                alert("未知错误");
+            }
+        });
+    };
+</script>
 <div style="padding: 100px 100px 10px;">
-    <form class="bs-example bs-example-form" role="form" method="post" action="/signup">
+    <form class="bs-example bs-example-form" role="form">
         <div class="input-group" style="width: 30em;">
             <span class="input-group-addon">昵　称</span>
-            <input name="nickname" type="text" class="form-control" placeholder="请输入昵称">
+            <input id="nickname" name="nickname" type="text" class="form-control" placeholder="请输入昵称">
         </div>
         <br>
         <div class="input-group" style="width: 30em;">
             <span class="input-group-addon">用户名</span>
-            <input name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
+            <input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
         </div>
         <br>
         <div class="input-group" style="width: 30em;">
             <span class="input-group-addon">密　码</span>
-            <input name="password" type="password" class="form-control">
+            <input id="password" name="password" type="password" class="form-control">
         </div>
         <br>
-        <button type="submit" class="btn btn-default">注册</button>
-        {% if sth_wrong %}
-        <p>用户名已经存在</p>
-        {% endif %}
+        <button type="button" onclick="signup()" class="btn btn-default">注册</button>
     </form>
 </div>
 

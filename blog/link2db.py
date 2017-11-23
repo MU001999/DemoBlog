@@ -21,8 +21,11 @@ def get_comments(order, col):
 # for users
 def check(username, password):
     if users.find_one({"username": username, 'password': password}):
-        return users.find_one({"username": username, 'password': password})['nickname']
-    return None
+        return users.find_one({"username": username, 'password': password})['nickname'], True
+    elif users.find_one({"username": username}):
+        return "password", False
+    else:
+        return "username", False
 
 
 def check_exist(username):
@@ -98,7 +101,13 @@ def update_article(order, title, content, labels, completed):
 
 def add_comment_for_article(cz, content, username, time_comment, order):
     corder = articles.find({'order': order, 'type': 'comment'}).count() + 1
-    articles.insert_one({'order': order, 'corder': corder, 'type': 'comment', 'cz': cz, 'content': content, 'username': username, 'time_comment': time_comment})
+    articles.insert_one({'order': order,
+                         'corder': corder,
+                         'type': 'comment',
+                         'cz': cz,
+                         'content': content,
+                         'username': username,
+                         'time_comment': time_comment})
 
 
 def get_article(article_id):

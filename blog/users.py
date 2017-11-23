@@ -13,16 +13,15 @@ def login():
     if request.method == 'POST':
         username, password = request.form['username'], request.form['password']
         ans = check(username, password)
-        if ans:
+        if ans[1]:
             session['logged_in'] = True
             session['username'] = username
             session['password'] = password
-            session['nickname'] = ans
-            return redirect('/')
-
-        return render_template('/users/login.html', sth_wrong=True)
-
-    return render_template('/users/login.html', sth_wrong=False)
+            session['nickname'] = ans[0]
+            return "success"
+        else:
+            return ans[0]
+    return render_template('/users/login.html')
 
 
 @app.route('/logout')
@@ -37,22 +36,19 @@ def logout():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method == 'GET':
-        return render_template('/users/signup.html', sth_wrong=False)
-
+    if request.method == "GET":
+        return render_template('/users/signup.html')
     if check_exist(request.form['username']):
-        return render_template('/users/signup.html', sth_wrong=True)
+        return "error"
 
     if add_user(request.form['username'], request.form['password'], request.form['nickname']):
         session['logged_in'] = True
-
         session['username'] = request.form['username']
         session['password'] = request.form['password']
         session['nickname'] = request.form['nickname']
-
-        return redirect('/')
-
-    return render_template('/users/signup.html', sth_wrong=True)
+        return "success"
+    else:
+        return "error"
 
 
 @app.route('/editpwd', methods=['GET', 'POST'])
