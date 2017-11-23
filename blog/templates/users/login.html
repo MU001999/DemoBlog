@@ -2,20 +2,31 @@
 
 {% block content %}
 
-<div style="padding: 100px 100px 10px;">
-    <form class="bs-example bs-example-form" role="form">
-        <div class="input-group" style="width: 30em;">
-            <span class="input-group-addon">用户名</span>
-            <input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
-        </div>
-        <br>
-        <div class="input-group" style="width: 30em;">
-            <span class="input-group-addon">密　码</span>
-            <input id="password" name="password" type="password" class="form-control">
-        </div>
-        <br>
-        <button type="button" onclick="login()" class="btn btn-default">登录</button>
-    </form>
+<div class="row clearfix" style="padding-top: 100px; ">
+    <div class="col-md-4 column" >
+        <form class="bs-example bs-example-form" role="form">
+            <div class="input-group">
+                <span class="input-group-addon">用户名</span>
+                <input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">密　码</span>
+                <input id="password" name="password" type="password" class="form-control">
+            </div>
+            <br>
+            <ul class="list-inline">
+                <li>
+                    <button type="button" onclick="login()" class="btn btn-default">登录</button>
+                </li>
+                <li>
+                    <button type="button" onclick="location.href='/signup'" class="btn btn-default">未有账号，去注册</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="col-md-8 column">
+    </div>
 </div>
 
 {% endblock %}

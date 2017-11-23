@@ -4,7 +4,7 @@
 <div class="row clearfix">
     <div class="col-md-4 column">
         <h3>
-            {{ session.get('nickname') }}<small>{{ session.get('username') }}</small>
+            {{ session.get('nickname') }}<small>    {{ session.get('username') }}</small>
         </h3>
         <ul class="list-inline">
             <li>
@@ -49,7 +49,7 @@
         </div>
 
     </div>
-    <div class="col-md-6 column">
+    <div class="col-md-8 column">
         <h3>
             我的文章
         </h3>
@@ -118,7 +118,7 @@
             </a>
 
             {% endif %}
-            <button onclick="location.href='/articles/edit/{{ article['order'] }}'" type="button" class="btn btn-block btn-default">修改文章</button>
+            <button onclick="location.href='/articles/edit/{{ article['order'] }}'" type="button" class="btn btn-default">修改文章</button>
         </div>
         {% endfor %}
     </div>
