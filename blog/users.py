@@ -8,20 +8,18 @@ from blog.link2db import *
 app.secret_key = os.urandom(24)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        username, password = request.form['username'], request.form['password']
-        ans = check(username, password)
-        if ans[1]:
-            session['logged_in'] = True
-            session['username'] = username
-            session['password'] = password
-            session['nickname'] = ans[0]
-            return "success"
-        else:
-            return ans[0]
-    return render_template('/users/login.html')
+    username, password = request.form['username'], request.form['password']
+    ans = check(username, password)
+    if ans[1]:
+        session['logged_in'] = True
+        session['username'] = username
+        session['password'] = password
+        session['nickname'] = ans[0]
+        return "success"
+    else:
+        return ans[0]
 
 
 @app.route('/logout')
@@ -80,7 +78,7 @@ def set_me():
         __ = get_articles_single_user(session['username'])
         return render_template('/users/me.html', articles=_, _=__)
     else:
-        return redirect('/login')
+        return render_template('/users/me.html')
 
 
 @app.route('/users/<username>')

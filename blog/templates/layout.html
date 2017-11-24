@@ -60,22 +60,13 @@
 <div class="container">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">O</a>
+            <a class="navbar-brand" href="/me">我</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/">首页</a>
-                </li>
-                <li>
-                    <a href="/me">我</a>
                 </li>
                 <li>
                     <a href="/articles/all/0">文章</a>
@@ -99,7 +90,17 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if not session.logged_in %}
                 <li>
-                    <a id="modal-123456" href="#modal-container-123456" data-toggle="modal">登录</a>
+                    <form class="navbar-form navbar-right form-inline">
+                        <div class="form-group">
+                            <label class="sr-only"></label>
+                            <input type="text" class="form-control" id="username" placeholder="用户名">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only"></label>
+                            <input type="password" class="form-control" id="password" placeholder="密码">
+                        </div>
+                        <button type="button" onclick="login()" class="btn btn-primary">登录</button>
+                    </form>
                 </li>
                 <li>
                     <a href="/signup">免费注册</a>
@@ -130,36 +131,6 @@
     </nav>
     <div>
         {% block content %}{% endblock %}
-    </div>
-    <div class="modal fade" id="modal-container-123456" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        Login
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group" >
-                        <span class="input-group-addon">用户名</span>
-                        <input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <span class="input-group-addon">密　码</span>
-                        <input id="password" name="password" type="password" class="form-control">
-                    </div>
-                    <br>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='/signup'">未有账号，去注册</button>
-                    <button type="button" onclick="login()" class="btn btn-primary">登录</button>
-                </div>
-            </div>
-
-        </div>
-
     </div>
 
 </div>

@@ -8,8 +8,7 @@ from blog.link2db import *
 
 @app.route('/forum')
 def set_forum():
-    return render_template('/forum/forum.html', posts=get_posts_recently(), name="Forum's Homepage")\
-        if session.get('logged_in', False) else redirect('/login')
+    return render_template('/forum/forum.html', posts=get_posts_recently(), name="Forum's Homepage")
 
 
 @app.route('/forum/posts/<int:order>', methods=['GET', 'POST'])

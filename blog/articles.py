@@ -10,7 +10,7 @@ from blog.link2db import *
 @app.route('/articles/write', methods=['GET', 'POST'])
 def paste_article():
     if request.method == 'GET':
-        return render_template('/articles/edit.html', edit=False) if session.get('logged_in', False) else redirect('/login')
+        return render_template('/articles/edit.html', edit=False)
 
     title, author, content = request.form['title'], session['nickname'], request.form['content']
     labels = request.form['labels'].split(";")
@@ -23,11 +23,9 @@ def paste_article():
 
 @app.route('/articles/edit/<int:order>', methods=['GET', 'POST'])
 def edit_article(order):
-    if not session.get('logged_in', False):
-        return redirect('/login')
     if request.method == 'GET':
         article = get_article(order)
-        if session['username'] != article['username']:
+        if session.get('username', None) != article['username']:
             abort(404)
         return render_template('/articles/edit.html', edit=True, article=article, labels=';'.join(article['labels']))
     title, content, labels = request.form['title'], request.form['content'], request.form['labels'].split(";")
@@ -47,9 +45,6 @@ def set_article(order):
                                article=article,
                                comments=comments,
                                edit=(session.get('username', None) == article['username']))
-    if not session.get('logged_in', False):
-        return redirect('/login')
-
     cz = session['nickname']
     content = request.form['content']
     username = session['username']

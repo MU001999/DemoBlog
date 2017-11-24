@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
+{% if not session.logged_in %}
+<div class="alert alert-danger" role="alert">
+    您现在的身份为访客，请先于右上角登录。
+</div>
+{% else %}
 <div class="row clearfix">
     <div class="col-md-4 column">
         <h3>
@@ -123,4 +128,5 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 {% endblock %}

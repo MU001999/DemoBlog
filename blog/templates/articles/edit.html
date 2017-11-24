@@ -2,6 +2,14 @@
 
 {% block content %}
 
+{% if not session.logged_in %}
+
+<div class="alert alert-danger" role="alert">
+    您现在的身份为访客，请先于右上角登录后验证身份。
+</div>
+
+{% else %}
+
 {% if edit %}
 <div class="row clearfix">
     <form method="post" action="/articles/edit/{{ article['order'] }}">
@@ -87,6 +95,8 @@
         </div>
     </form>
 </div>
+
+{% endif %}
 
 {% endif %}
 

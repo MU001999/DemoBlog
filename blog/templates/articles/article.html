@@ -47,6 +47,11 @@
         </div>
     </div>
 </div>
+{% if not session.logged_in %}
+<div class="alert alert-danger" role="alert">
+    在您（于右上角）登录后即可发表评论。
+</div>
+{% else %}
 <div class="row clearfix">
     <div class="col-md-12 column">
         <form role="form" action="/articles/{{ article['order'] }}" method="post">
@@ -55,6 +60,7 @@
         </form>
     </div>
 </div>
+{% endif %}
 <div class="row clearfix">
     <div class="col-md-12 column">
         <h3>

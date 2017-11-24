@@ -3,7 +3,11 @@
 {% block content %}
 
 <div class="row clearfix">
-
+    {% if not session.logged_in %}
+    <div class="alert alert-danger" role="alert">
+        您现在的身份为访客，请先于右上角登录。
+    </div>
+    {% else %}
     <div class="col-md-4 column">
         <h3>
             {{ session.get('nickname') }}<small>    {{ session.get('username') }}</small>
@@ -23,6 +27,7 @@
             </li>
         </ul>
     </div>
+    {% endif %}
 
     <div class="modal fade" id="modal-container-246585" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -62,12 +67,18 @@
     </h1>
 </div>
 
+{% if not session.logged_in %}
+<div class="alert alert-danger" role="alert">
+    在您（于右上角）登录后即可跟帖。
+</div>
+{% else %}
 <div class="col-md-12 column">
     <form role="form" action="/forum/posts/{{ post['order'] }}" method="post">
         <textarea class="form-control" rows="3" name="content">发表评论</textarea>
         <button type="submit" class="btn btn-default">发表</button>
     </form>
 </div>
+{% endif %}
 
 <div class="row clearfix">
 
