@@ -28,7 +28,6 @@
         </ul>
     </div>
     {% endif %}
-
     <div class="modal fade" id="modal-container-246585" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -53,20 +52,35 @@
                     </div>
                 </form>
             </div>
-
         </div>
-
+    </div>
+</div>
+<br><br>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="panel panel-success article">
+            <div class="panel-heading lead">
+                <h1>{{ post['title'] }}</h1>
+            </div>
+            <div class="panel-body">
+                <p class="lead">{{ post['content'] }}</p>
+                <em>
+                    <strong>{{ post['lz'] }}</strong> on {{ post['time_post'] }}
+                </em>
+            </div>
+            <ul class="list-group">
+                {% for comment in comments %}
+                <li class="list-group-item">
+                    <em>{{ comment['corder'] }}楼</em>
+                    <p class="lead">{{ comment['content'] }}</p>
+                    <p class="text-right"><em ><strong>{{ comment['cz'] }}</strong> on {{ comment['time_comment'] }}</em></p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
 </div>
-
-<div class="page-header">
-    <h1>
-        {{ post['title'] }}
-        <span>{{ post['time_post'] }}</span>
-    </h1>
-</div>
-
 {% if not session.logged_in %}
 <div class="alert alert-danger" role="alert">
     在您（于右上角）登录后即可跟帖。
@@ -74,40 +88,13 @@
 {% else %}
 <div class="col-md-12 column">
     <form role="form" action="/forum/posts/{{ post['order'] }}" method="post">
-        <textarea class="form-control" rows="3" name="content">发表评论</textarea>
-        <button type="submit" class="btn btn-default">发表</button>
+        <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">跟帖</span>
+            <input id="content" name="content" type="text" onkeypress="kdown(event)" class="form-control" placeholder="消息" aria-label="消息">
+            <span class="input-group-btn"><button class="btn btn-info" onclick= type="submit">发送(Enter也可以)</button></span>
+        </div>
     </form>
 </div>
 {% endif %}
-
-<div class="row clearfix">
-
-    <div class="col-md-12 column">
-
-        <blockquote>
-            <p>
-                {{ post['content'] }}
-            </p>
-            <small>
-                {{ post['lz'] }} on {{ post['time_post'] }}
-            </small>
-        </blockquote>
-
-        {% for comment in comments %}
-        {{ comment['corder'] }}楼
-        <blockquote>
-            <p>
-                {{ comment['content'] }}
-            </p>
-            <small>
-                {{ comment['cz'] }} on {{ comment['time_comment'] }}
-            </small>
-        </blockquote>
-
-        {% endfor %}
-
-    </div>
-
-</div>
 
 {% endblock %}

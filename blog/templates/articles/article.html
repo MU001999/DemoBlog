@@ -21,12 +21,12 @@
             </li>
             {% endfor %}
         </ul>
+        {% if edit %}
+        <a href="/articles/edit/{{ article['order'] }}"><p class="text-center">修改文章</p></a>
+        {% endif %}
         <h3 class="text-center">
             {{ article['time_post'] }}
         </h3>
-        {% if edit %}
-        <button onclick="location.href='/articles/edit/{{ article['order'] }}'" type="button" class="btn btn-block btn-default">修改文章</button>
-        {% endif %}
     </div>
 </div>
 <div class="row clearfix">
@@ -46,6 +46,7 @@
         </div>
     </div>
 </div>
+<br>
 {% if not session.logged_in %}
 <div class="alert alert-danger" role="alert">
     在您（于右上角）登录后即可发表评论。
@@ -54,29 +55,32 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
         <form role="form" action="/articles/{{ article['order'] }}" method="post">
-            <textarea class="form-control" rows="3" name="content">发表评论</textarea>
-            <button type="submit" class="btn btn-default">发表</button>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">评论</span>
+                <input id="content" name="content" type="text" onkeypress="kdown(event)" class="form-control" placeholder="消息" aria-label="消息">
+                <span class="input-group-btn"><button class="btn btn-info" type="submit">发送(Enter也可以)</button></span>
+            </div>
         </form>
     </div>
 </div>
 {% endif %}
+<br>
 <div class="row clearfix">
     <div class="col-md-12 column">
-        <h3>
-            评论
-        </h3>
-        {% for comment in comments %}
-        {{ comment['corder'] }}楼
-        <blockquote>
-            <p>
-                {{ comment['content'] }}
-            </p>
-            <small>
-                {{ comment['cz'] }} on {{ comment['time_comment'] }}
-            </small>
-        </blockquote>
-
-        {% endfor %}
+        <div class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">已有评论</div>
+            <!-- List group -->
+            <ul class="list-group">
+                {% for comment in comments %}
+                <li class="list-group-item">
+                    <span>{{ comment['corder'] }}楼</span>
+                    <p class="lead">{{ comment['content'] }}</p>
+                    <em><strong>{{ comment['cz'] }}</strong> on {{ comment['time_comment'] }}</em>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}
