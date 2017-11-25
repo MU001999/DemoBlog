@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 import time
 from flask import render_template, redirect, request, session, abort
 from blog import app

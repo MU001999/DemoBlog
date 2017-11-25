@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import time
-from flask import render_template, redirect, request, session, jsonify
+from flask import render_template, request
 from flask_socketio import join_room, leave_room, send, emit
 from blog import socketio, app
-from blog.link2db import *
 
 
 nicks = set()

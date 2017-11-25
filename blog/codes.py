@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request
 from blog import app
 from blog.link2db import *
 
