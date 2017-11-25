@@ -10,37 +10,41 @@
         </h1>
     </div>
     <div class="col-md-7 column">
-        <h4>
+        <p class="well well-sm">
             最近八篇文章
-        </h4>
+        </p>
+        <br>
         {% for article in articles %}
         {% if article['completed'] %}
-        <div class="page-header">
-            <a href="/articles/{{ article['order'] }}">
-                <h3>
-                    {{ article['title'] }}
-                    <small>{{ article['author'] }}</small>
-                </h3>
-            </a>
+        <div class="panel panel-info article">
+            <div class="panel-body article2" onclick="location.href='/articles/{{ article['order'] }}'">
+                <h4>
+                    <strong>{{ article['title'] }}</strong>
+                </h4>
+            </div>
+            <div class="panel-footer article1" onclick="location.href='/users/{{ article['username'] }}'">
+                <strong>{{ article['author'] }}</strong><em>    {{ article['time_post'] }}</em>
+            </div>
         </div>
         {% endif %}
         {% endfor %}
     </div>
     <div class="col-md-5 column">
-        <h4>
+        <p class="well well-sm">
             最近帖子
-        </h4>
+        </p>
+        <br>
         {% for post in posts %}
-
-        <div class="page-header">
-            <a href="/forum/posts/{{ post['order'] }}">
-                <h3>
-                    {{ post['title'] }}
-                    <small>{{ post['lz'] }}</small>
-                </h3>
-            </a>
+        <div class="panel panel-info article">
+            <div class="panel-body article2" onclick="location.href='/forum/posts/{{ post['order'] }}'">
+                <h4>
+                    <strong>{{ post['title'] }}</strong>
+                </h4>
+            </div>
+            <div class="panel-footer article1" onclick="location.href='/users/{{ post['username'] }}'">
+                <strong>{{ post['lz'] }}</strong><em>    {{ post['time_post'] }}</em>
+            </div>
         </div>
-
         {% endfor %}
     </div>
 </div>

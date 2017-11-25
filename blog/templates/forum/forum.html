@@ -85,18 +85,22 @@
 </div>
 
 <div class="row clearfix">
-
     <div class="col-md-12 column">
-
+        <br>
+        <p class="well well-sm">
+            最近帖子
+        </p>
         {% for post in posts %}
 
-        <div class="page-header">
-            <a href="/forum/posts/{{ post['order'] }}">
-                <h3>
-                    {{ post['title'] }}
-                    <small>{{ post['lz'] }}</small>
-                </h3>
-            </a>
+        <div class="panel panel-info article">
+            <div class="panel-body article2" onclick="location.href='/forum/posts/{{ post['order'] }}'">
+                <h4>
+                    <strong>{{ post['title'] }}</strong>
+                </h4>
+            </div>
+            <div class="panel-footer article1" onclick="location.href='/users/{{ post['username'] }}'">
+                <strong>{{ post['lz'] }}</strong><em>    {{ post['time_post'] }}</em>
+            </div>
         </div>
 
         {% endfor %}

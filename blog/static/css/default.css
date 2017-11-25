@@ -9,3 +9,19 @@ body {
     background-attachment: fixed !important;
     background-size: 100% !important;
 }
+
+.article{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.article2:hover{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.article1{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.article1:hover{
+    background-color: rgba(255, 255, 255, 1);
+}

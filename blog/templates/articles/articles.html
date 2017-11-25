@@ -11,13 +11,15 @@
     <div class="col-md-12 column">
         {% for article in articles %}
         {% if article['completed'] %}
-        <div class="page-header">
-            <a href="/articles/{{ article['order'] }}">
-                <h3>
-                    {{ article['title'] }}
-                    <small>{{ article['author'] }}</small>
-                </h3>
-            </a>
+        <div class="panel panel-info article">
+            <div class="panel-body article2" onclick="location.href='/articles/{{ article['order'] }}'">
+                <h4>
+                    <strong>{{ article['title'] }}</strong>
+                </h4>
+            </div>
+            <div class="panel-footer article1" onclick="location.href='/users/{{ article['username'] }}'">
+                <strong>{{ article['author'] }}</strong><em>    {{ article['time_post'] }}</em>
+            </div>
         </div>
         {% endif %}
         {% endfor %}
