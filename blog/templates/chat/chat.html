@@ -5,30 +5,79 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script type="text/javascript" charset="utf-8">
     var socket = io.connect('http://' + document.domain + ':' + location.port);
-    socket.on('message', function(msg)
-    {
+
+    socket.on('message', function(msg){
         document.getElementById('id_recently').innerText = msg;
     })
-    socket.on('recv_msg', function(data)
-    {
-        document.getElementById('all_msgs').innerHTML += "<dt style=\"border-style: solid;\">"+data['nickname']+"</dt><dd style=\"padding: 5px;\">"+data['msg']+"</dd>";
+
+    socket.on('recv_msg', function(data){
+        if (data['nickname'] == nickname){
+            html = "<a href='#' class='list-group-item list-group-item-info flex-column align-items-start'><div class='d-flex w-100 justify-content-between'><strong>"+data['nickname']+"</strong><em>    "+data['time']+"</em></div><p class='lead'>"+data['msg']+"</p></a>";
+        }
+        else{
+            html = "<a href='#' class='list-group-item list-group-item-warning flex-column align-items-start'><div class='d-flex w-100 justify-content-between'><strong>"+data['nickname']+"</strong><em>    "+data['time']+"</em></div><p class='lead'>"+data['msg']+"</p></a>";
+        }
+        document.getElementById('all_msgs').innerHTML = html + document.getElementById('all_msgs').innerHTML
         location.href = "#msg_ta"
     })
-    do
-    {
-        var nickname = prompt("请输入您的昵称：", "");
+
+    socket.on('change_num', function(msg){
+        document.getElementById('num').innerText = msg;
+    })
+
+    nickname = $.cookie('nick');
+    if (nickname!=null&&nickname!=""){
+        $.ajax({
+            url: '/chat/check',
+            data: {'nick': nickname},
+            type: "POST",
+            async: false,
+            success: function(res){
+                if (res == "exist"){
+                    nickname = null;
+                }
+            },
+            fail: function(){
+                nickname = null;
+            }
+        });
     }
-    while(nickname=="");
+    while(nickname==null||nickname==""){
+        nickname = prompt("请输入您的昵称(再次出现或因为昵称已存在)：");
+        if (nickname!=null&&nickname!=""){
+            $.ajax({
+                url: '/chat/check',
+                data: {'nick': nickname},
+                type: "POST",
+                async: false,
+                success: function(res){
+                    if (res == "exist"){
+                        nickname = null;
+                    }
+                },
+                fail: function(){
+                    nickname = null;
+                }
+            });
+        }
+    };
+
+    $.cookie('nick', nickname);
     socket.emit('join', {'nickname': nickname, 'room': 'chat'});
-    function send_msg()
-    {
+
+    window.onbeforeunload=function (){
+        if (nickname != null){
+            socket.emit('leave', {'nickname': nickname, 'room': 'chat'});
+        }
+    }
+
+    function send_msg(){
         socket.emit('send_msg', {'nickname': nickname, 'room': 'chat', 'msg': document.getElementById('msg_ta').value});
         document.getElementById('msg_ta').value = '';
     }
-    function kdown(e)
-    {
-        if(e.keyCode == 13)
-        {
+
+    function kdown(e){
+        if(e.keyCode == 13){
             e.preventDefault();
             var msg = document.getElementById('msg_ta').value;
             document.getElementById('msg_ta').value = '';
@@ -37,22 +86,26 @@
     }
 </script>
 
-<h2 class="text-center">
-    Jusot's 聊天室
-</h2>
-
 <div class="row clearfix">
-    <h5 id="id_recently" class="text-center">
-    </h5>
+
+    <div class="alert alert-success" role="alert">
+        <strong id="id_recently"></strong>目前共 <label id="num">0</label> 人在线
+    </div>
     <div class="col-md-12 column">
-        <dl id="all_msgs">
-        </dl>
+        <div class="input-group input-group-lg">
+            <input id="msg_ta" type="text" onkeypress="kdown(event)" class="form-control" placeholder="消息" aria-label="消息">
+            <span class="input-group-btn"><button class="btn btn-info" onclick="send_msg()" type="button">发送(Enter也可以)</button></span>
+        </div>
     </div>
 </div>
 <div class="row clearfix">
     <div class="col-md-12 column">
-        <textarea cols="120" id="msg_ta" onkeypress="kdown(event)" placeholder="Enter也可以发送"></textarea>
-        <button onclick="send_msg()" class="btn btn-default btn-block">发送</button>
+        <a href="#" class="list-group-item disabled">
+            最新的消息会显示在最上方
+        </a>
+        <br>
+        <div class="list-group" id="all_msgs">
+        </div>
     </div>
 </div>
 
