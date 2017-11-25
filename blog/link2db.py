@@ -170,6 +170,6 @@ def search_by_target(target):
 
 
 def search_by_username(username):
-    pos = posts.find({'username': username})
-    arts = articles.find({'username': username})
+    pos = posts.find({'username': username, 'type': 'post'})
+    arts = articles.find({'username': username, 'type': 'article'})
     return pos, arts
