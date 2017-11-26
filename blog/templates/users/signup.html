@@ -5,9 +5,9 @@
 <script>
     function signup()
     {
-        nickname = $("#nickname").val();
-        username = $("#username").val();
-        password = $("#password").val();
+        nickname = $("#nnickname").val();
+        username = $("#nusername").val();
+        password = $("#npassword").val();
         var formData = new FormData();
         formData.append("nickname", nickname);
         formData.append("username", username);
@@ -45,17 +45,17 @@
         <form class="bs-example bs-example-form" role="form">
             <div class="input-group" style="width: 30em;">
                 <span class="input-group-addon">昵　称</span>
-                <input id="nickname" name="nickname" type="text" class="form-control" placeholder="请输入昵称">
+                <input id="nnickname" name="nnickname" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入昵称">
             </div>
             <br>
             <div class="input-group" style="width: 30em;">
                 <span class="input-group-addon">用户名</span>
-                <input id="username" name="username" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
+                <input id="nusername" name="nusername" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入用户名，只限字母和数字">
             </div>
             <br>
             <div class="input-group" style="width: 30em;">
                 <span class="input-group-addon">密　码</span>
-                <input id="password" name="password" type="password" class="form-control">
+                <input id="npassword" name="npassword" type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control">
             </div>
             <br>
             <ul class="list-inline">

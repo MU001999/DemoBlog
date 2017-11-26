@@ -24,8 +24,24 @@ def get_comments(order, col):
     return eval(col).find({'type': 'comment', 'order': order}).sort('corder')
 
 
+def to_str(unicode_or_str):
+    if isinstance(unicode_or_str, unicode):
+        return unicode_or_str.encode('utf-8')
+    else:
+        return unicode_or_str
+
+
+def to_unicode(unicode_or_str):
+    if isinstance(unicode_or_str, str):
+        return unicode_or_str.encode('utf-8')
+    else:
+        return unicode_or_str
+
+
 # for users
 def check_password(password, hashed):
+    password = to_str(password)
+    hashed = to_str(hashed)
     return bcrypt.hashpw(password, hashed) == hashed
 
 
@@ -52,20 +68,23 @@ def check_exist(username):
 
 def add_user(username, password, nickname):
     try:
+        password = to_str(password)
+        password = bcrypt.hashpw(password, bcrypt.gensalt(8))
+        password = to_unicode(password)
         users.insert_one({'username': username,
-                          'password': bcrypt.hashpw(password, bcrypt.gensalt(8)),
+                          'password': password,
                           'nickname': nickname})
     except LinkDbError:
-        LinkDbError("error at add_user() in link2db")
+        raise LinkDbError("error at add_user() in link2db")
     else:
         return True
-    finally:
-        return False
 
 
 def update_user(username, u2n, info):
     if info == "pwd":
+        u2n = to_str(u2n)
         u2n = bcrypt.hashpw(u2n, bcrypt.gensalt(8))
+        u2n = to_unicode(u2n)
         users.update({"username": username}, {"$set": {"password": u2n}})
     elif info == "nick":
         global articles_sorted
