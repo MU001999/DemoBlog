@@ -36,8 +36,13 @@
                 <input name="sign" type="text" class="form-control" value="{{ user['sign'] }}">
             </div>
             <br>
+            <div class="input-group">
+                <span class="input-group-addon">邮箱将修改为</span>
+                <input name="email_addr" type="email" class="form-control" value="{{ user['email_addr'] }}">
+            </div>
+            <br>
             <button type="submit" class="btn btn-default">修改资料</button>
-            <br><br>
+            <br>
         </form>
     </div>
     <div class="col-md-4 column">
@@ -47,7 +52,7 @@
                 <span class="input-group-addon">密码将修改为</span>
                 <input name="password" type="password" class="form-control">
             </div>
-            <br><br><br><br>
+            <br>
             <button type="submit" class="btn btn-default">修改密码</button>
         </form>
     </div>

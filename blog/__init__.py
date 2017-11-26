@@ -8,5 +8,4 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-
-from blog import articles, chat, codes, forum, index, users
+from blog import main

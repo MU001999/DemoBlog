@@ -3,6 +3,7 @@
 import time
 from flask import render_template, redirect, request, session, abort
 from blog import app
+from blog.ema import SendEmail
 from blog.link2db import *
 
 
@@ -51,8 +52,11 @@ def set_article(order):
     content = request.form['content']
     username = session['username']
     time_comment = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-
     add_comment_for_article(cz, content, username, time_comment, order)
+
+    article = get_article(order)
+    to_addr = get_user(article['username'])['email_addr']
+    SendEmail.send_email(to_addr, username, article['title'])
     return redirect('/articles/' + str(order))
 
 

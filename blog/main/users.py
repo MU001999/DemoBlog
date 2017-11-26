@@ -49,7 +49,10 @@ def signup():
     if check_exist(request.form['username']):
         return "error"
 
-    if add_user(request.form['username'], request.form['password'], request.form['nickname']):
+    if add_user(request.form['username'],
+                request.form['password'],
+                request.form['nickname'],
+                request.form['email_addr']):
         session['logged_in'] = True
         session['username'] = request.form['username']
         session['password'] = request.form['password']
@@ -85,6 +88,7 @@ def edit_info():
     u2n = list()
     u2n.append(request.form['nickname'])
     u2n.append(request.form.get('sign', ""))
+    u2n.append(request.form.get('email_addr', ""))
     update_user(session['username'], u2n, "info")
     session['nickname'] = u2n[0]
     return redirect('/edit')

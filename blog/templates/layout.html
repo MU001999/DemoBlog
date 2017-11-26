@@ -59,7 +59,13 @@
 
         function logout(){
             $.get('/logout', function(){
-                location.reload();
+                var s = new String(window.location.href);
+                if (s.indexOf("/edit")==-1){
+                    location.reload();
+                }
+                else{
+                    window.location.href="/";
+                }
             });
         };
     </script>

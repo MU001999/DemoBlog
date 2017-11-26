@@ -8,10 +8,12 @@
         nickname = $("#nnickname").val();
         username = $("#nusername").val();
         password = $("#npassword").val();
+        email_addr = $("#email_addr").val();
         var formData = new FormData();
         formData.append("nickname", nickname);
         formData.append("username", username);
         formData.append("password", password);
+        formData.append("email_addr", email_addr);
         $.ajax({
             url: '/signup',
             data: formData,
@@ -55,12 +57,17 @@
             <br>
             <div class="input-group" style="width: 30em;">
                 <span class="input-group-addon">密　码</span>
-                <input id="npassword" name="npassword" type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control">
+                <input id="npassword" name="npassword" type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control" placeholder="请输入密码">
+            </div>
+            <br>
+            <div class="input-group" style="width: 30em;">
+                <span class="input-group-addon">邮　箱</span>
+                <input id="email_addr" name="email_addr" type="email" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入常用邮箱">
             </div>
             <br>
             <ul class="list-inline">
                 <li>
-                    <button type="button" onclick="signup()" class="btn btn-default">注册</button>
+                    <button type="button" onclick="signup()" class="btn btn-default">注　册</button>
                 </li>
                 <li>
                     <button type="button" class="btn btn-primary" disabled="disabled">已有账号，请在右上角登录</button>

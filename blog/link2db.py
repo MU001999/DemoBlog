@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 import pymongo
 import bcrypt
+from blog.common import *
 
 
 conn = pymongo.MongoClient('localhost', 27017)
@@ -22,20 +24,6 @@ class LinkDbError(Exception):
 
 def get_comments(order, col):
     return eval(col).find({'type': 'comment', 'order': order}).sort('corder')
-
-
-def to_str(unicode_or_str):
-    if isinstance(unicode_or_str, unicode):
-        return unicode_or_str.encode('utf-8')
-    else:
-        return unicode_or_str
-
-
-def to_unicode(unicode_or_str):
-    if isinstance(unicode_or_str, str):
-        return unicode_or_str.encode('utf-8')
-    else:
-        return unicode_or_str
 
 
 # for users
@@ -66,7 +54,7 @@ def check_exist(username):
     return False
 
 
-def add_user(username, password, nickname):
+def add_user(username, password, nickname, email_addr):
     try:
         password = to_str(password)
         password = bcrypt.hashpw(password, bcrypt.gensalt(8))
@@ -75,7 +63,8 @@ def add_user(username, password, nickname):
                           'password': password,
                           'nickname': nickname,
                           'avatar': "default.jpg",
-                          'sign': "热爱学习"})
+                          'sign': "热爱学习",
+                          'email_addr': email_addr})
     except LinkDbError:
         raise LinkDbError("error at add_user() in link2db")
     else:
@@ -92,9 +81,11 @@ def update_user(username, u2n, info):
     elif info == "info":
         global articles_sorted
         users.update({"username": username},
-                     {"$set": {"nickname": u2n[0], "sign": u2n[1]}}, multi=True, upsert=True)
+                     {"$set": {"nickname": u2n[0],
+                               "sign": u2n[1],
+                               "email_addr": u2n[2]}}, multi=True, upsert=True)
         articles.update({"username": username},
-                        {"$set": {"author": u2n[0]}}, multi=True)
+                        {"$set": {"author": u2n[0]}}, multi=True, upsert=True)
         posts.update({"username": username},
                      {"$set": {"lz": u2n[0]}}, multi=True)
         articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
