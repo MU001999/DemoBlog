@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pymongo
+import bcrypt
 
 
 conn = pymongo.MongoClient('localhost', 27017)
@@ -19,11 +20,18 @@ def get_comments(order, col):
 
 
 # for users
+def check_password(password, hashed):
+    return bcrypt.hashpw(password, hashed) == hashed
+
+
 def check(username, password):
-    if users.find_one({"username": username, 'password': password}):
-        return users.find_one({"username": username, 'password': password})['nickname'], True
-    elif users.find_one({"username": username}):
-        return "password", False
+    if users.find_one({"username": username}):
+        user = users.find_one({"username": username})
+        hashed = user['password']
+        if check_password(password, hashed):
+            return user['nickname'], True
+        else:
+            return "password", False
     else:
         return "username", False
 
@@ -36,7 +44,7 @@ def check_exist(username):
 
 def add_user(username, password, nickname):
     try:
-        users.insert_one({'username': username, 'password': password, 'nickname': nickname})
+        users.insert_one({'username': username, 'password': bcrypt.hashpw(password, bcrypt.gensalt(8)), 'nickname': nickname})
         return True
     except:
         raise False
@@ -44,6 +52,7 @@ def add_user(username, password, nickname):
 
 def update_user(username, u2n, info):
     if info == "pwd":
+        u2n = bcrypt.hashpw(u2n, bcrypt.gensalt(8))
         users.update({"username": username}, {"$set": {"password": u2n}})
     elif info == "nick":
         global articles_sorted
