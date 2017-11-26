@@ -26,7 +26,10 @@ def edit_article(order):
         article = get_article(order)
         if session.get('username', None) != article['username']:
             abort(404)
-        return render_template('/articles/edit.html', edit=True, article=article, labels=';'.join(article['labels']))
+        return render_template('/articles/edit.html',
+                               edit=True,
+                               article=article,
+                               labels=';'.join(article['labels']))
     title, content, labels = request.form['title'], request.form['content'], request.form['labels'].split(";")
     completed = request.form['completed'] == "1"
     update_article(order, title, content, labels, completed)

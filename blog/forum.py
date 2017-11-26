@@ -33,4 +33,6 @@ def write_post():
 
 @app.route('/forum/plates/<name>')
 def set_plate(name):
-    return render_template('/forum/forum.html', name=name, posts=get_posts_by_plate(name))
+    return render_template('/forum/forum.html',
+                           name=name,
+                           posts=get_posts_by_plate(name))

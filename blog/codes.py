@@ -17,4 +17,7 @@ def paste_code():
 @app.route('/codes/<int:code_id>')
 def set_code(code_id):
     poster, syntax, content = get_code(code_id)
-    return render_template('/codes/code.html', poster=poster, syntax=syntax, content=content)
+    return render_template('/codes/code.html',
+                           poster=poster,
+                           syntax=syntax,
+                           content=content)

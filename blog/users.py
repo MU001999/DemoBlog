@@ -63,7 +63,6 @@ def edit_pwd():
 def edit_nick():
     if request.method == 'GET':
         return render_template('/users/edit.html', see=True)
-
     u2n = request.form['nickname']
     update_user(session['username'], u2n, "nick")
     session['nickname'] = u2n
@@ -84,4 +83,7 @@ def set_me():
 def set_other(username):
     user = get_user(username)
     pos, arts = search_by_username(username)
-    return render_template('/users/other.html', user=user, posts=pos, articles=arts)
+    return render_template('/users/other.html',
+                           user=user,
+                           posts=pos,
+                           articles=arts)

@@ -41,7 +41,11 @@ def on_send_msg(data):
     nickname = data['nickname']
     room = data['room']
     msg = data['msg']
-    emit('recv_msg', {'nickname': nickname, 'msg': msg, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}, room=room)
+    emit('recv_msg',
+         {'nickname': nickname,
+          'msg': msg,
+          'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())},
+         room=room)
 
 
 @socketio.on('leave')

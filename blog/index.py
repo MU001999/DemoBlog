@@ -17,11 +17,17 @@ def favicon():
 def hello():
     pos = get_posts_recently()
     arts = get_articles_recently()
-    return render_template('/index/index.html', posts=pos, articles=arts)
+    return render_template('/index/index.html',
+                           posts=pos,
+                           articles=arts)
 
 
 @app.route('/search', methods=['POST'])
 def search():
     target = request.form['target']
     us, pos, cods, arts = search_by_target(target)
-    return render_template('/index/search.html', users=us, posts=pos, codes=cods, articles=arts)
+    return render_template('/index/search.html',
+                           users=us,
+                           posts=pos,
+                           codes=cods,
+                           articles=arts)

@@ -15,6 +15,11 @@ articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCE
 
 
 # common
+class LinkDbError(Exception):
+    def __init__(self, arg):
+        self.args = arg
+
+
 def get_comments(order, col):
     return eval(col).find({'type': 'comment', 'order': order}).sort('corder')
 
@@ -25,15 +30,18 @@ def check_password(password, hashed):
 
 
 def check(username, password):
-    if users.find_one({"username": username}):
-        user = users.find_one({"username": username})
-        hashed = user['password']
-        if check_password(password, hashed):
-            return user['nickname'], True
+    try:
+        if users.find_one({"username": username}):
+            user = users.find_one({"username": username})
+            hashed = user['password']
+            if check_password(password, hashed):
+                return user['nickname'], True
+            else:
+                return "password", False
         else:
-            return "password", False
-    else:
-        return "username", False
+            return "username", False
+    except LinkDbError:
+        raise LinkDbError("error at check() in link2db")
 
 
 def check_exist(username):
@@ -44,10 +52,15 @@ def check_exist(username):
 
 def add_user(username, password, nickname):
     try:
-        users.insert_one({'username': username, 'password': bcrypt.hashpw(password, bcrypt.gensalt(8)), 'nickname': nickname})
+        users.insert_one({'username': username,
+                          'password': bcrypt.hashpw(password, bcrypt.gensalt(8)),
+                          'nickname': nickname})
+    except LinkDbError:
+        LinkDbError("error at add_user() in link2db")
+    else:
         return True
-    except:
-        raise False
+    finally:
+        return False
 
 
 def update_user(username, u2n, info):
@@ -56,9 +69,12 @@ def update_user(username, u2n, info):
         users.update({"username": username}, {"$set": {"password": u2n}})
     elif info == "nick":
         global articles_sorted
-        users.update({"username": username}, {"$set": {"nickname": u2n}}, multi=True)
-        articles.update({"username": username}, {"$set": {"author": u2n}}, multi=True)
-        posts.update({"username": username}, {"$set": {"lz": u2n}}, multi=True)
+        users.update({"username": username},
+                     {"$set": {"nickname": u2n}}, multi=True)
+        articles.update({"username": username},
+                        {"$set": {"author": u2n}}, multi=True)
+        posts.update({"username": username},
+                     {"$set": {"lz": u2n}}, multi=True)
         articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
 
 
@@ -70,7 +86,10 @@ def get_user(username):
 def add_code(poster, syntax, content):
     try:
         order = codes.find().count()
-        codes.insert_one({'poster': poster, 'syntax': syntax, 'content': content, 'order': order})
+        codes.insert_one({'poster': poster,
+                          'syntax': syntax,
+                          'content': content,
+                          'order': order})
         return order
     except MemoryError:
         raise MemoryError
@@ -104,7 +123,10 @@ def add_article(title, author, content, time_post, username, labels, completed):
 def update_article(order, title, content, labels, completed):
     global articles_sorted
     articles.update({"order": order, "type": "article"},
-                    {"$set": {"title": title, "content": content, "labels": labels, "completed": completed}})
+                    {"$set": {"title": title,
+                              "content": content,
+                              "labels": labels,
+                              "completed": completed}})
     articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
 
 
@@ -146,15 +168,28 @@ def del_articles_by_orders(orders):
 def add_post(title, lz, content, time_post, plate, username):
     try:
         order = posts.find({'type': 'post'}).count()
-        posts.insert_one({'order': order, 'type': 'post', 'title': title, 'lz': lz, 'content': content, 'time_post': time_post, 'plate': plate, 'username': username})
+        posts.insert_one({'order': order,
+                          'type': 'post',
+                          'title': title,
+                          'lz': lz,
+                          'content': content,
+                          'time_post': time_post,
+                          'plate': plate,
+                          'username': username})
         return order
-    except MemoryError:
-        raise MemoryError
+    except LinkDbError:
+        raise LinkDbError("error at add_post() in link2db")
 
 
 def add_comment_for_post(cz, content, username, time_comment, order):
     corder = posts.find({'order': order, 'type': 'comment'}).count() + 1
-    posts.insert_one({'order': order, 'corder': corder, 'type': 'comment', 'cz': cz, 'content': content, 'username': username, 'time_comment': time_comment})
+    posts.insert_one({'order': order,
+                      'corder': corder,
+                      'type': 'comment',
+                      'cz': cz,
+                      'content': content,
+                      'username': username,
+                      'time_comment': time_comment})
 
 
 def get_post(order):
