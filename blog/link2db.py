@@ -73,7 +73,9 @@ def add_user(username, password, nickname):
         password = to_unicode(password)
         users.insert_one({'username': username,
                           'password': password,
-                          'nickname': nickname})
+                          'nickname': nickname,
+                          'avatar': "default.jpg",
+                          'sign': "热爱学习"})
     except LinkDbError:
         raise LinkDbError("error at add_user() in link2db")
     else:
@@ -98,7 +100,7 @@ def update_user(username, u2n, info):
         articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
     elif info == "avatar":
         users.update({"username": username},
-                     {"$set": {"avatar": u2n}})
+                     {"$set": {"avatar": u2n}}, upsert=True)
 
 
 def get_user(username):

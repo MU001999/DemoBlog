@@ -9,11 +9,7 @@
 <br><br><br>
 <div class="row clearfix">
     <div class="col-md-12 column">
-        {% if user['avatar'] %}
-        <img src="/static/imgs/users/{{ user['avatar'] }}" class="img-responsive img-circle">
-        {% else %}
-        <img src="/static/imgs/default.jpg" class="img-responsive img-circle">
-        {% endif %}
+        <img src="/static/imgs/users/{{ user['avatar'] }}" class="img-circle avatar_me">
     </div>
     <div class="col-md-4 column">
         <form class="bs-example bs-example-form" role="form" method="post" action="/editavatar" enctype="multipart/form-data">

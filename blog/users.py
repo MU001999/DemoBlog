@@ -54,6 +54,7 @@ def signup():
         session['username'] = request.form['username']
         session['password'] = request.form['password']
         session['nickname'] = request.form['nickname']
+        session['avatar'] = get_user(request.form['username'])['avatar']
         return "success"
     else:
         return "error"
@@ -75,6 +76,7 @@ def edit_avatar():
         file_name = os.path.join('blog', 'static', 'imgs', 'users', session['username'], secure_filename(f.filename))
         f.save(file_name)
         update_user(session['username'], os.path.join(session['username'], f.filename), "avatar")
+        session['avatar'] = get_user(session['username'])['avatar']
     return redirect('/edit')
 
 
