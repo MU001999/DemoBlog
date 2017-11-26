@@ -8,12 +8,15 @@
 {% else %}
 <div class="row clearfix">
     <div class="col-md-4 column">
-        <h3>
-            {{ session.get('nickname') }}<small>    {{ session.get('username') }}</small>
+        <img src="/static/imgs/users/{{ user['avatar'] }}" class="center-block img-circle avatar_me">
+        <h3 class="text-center">
+            {{ user['nickname'] }}
         </h3>
+        <p class="text-center"><em>{{ user['username'] }}</em></p>
+        <p class="text-center">{{ user['sign'] }}</p>
         <ul class="list-inline">
             <li>
-                <button onclick="location.href='/editnick'" type="button" class="btn btn-default">修改昵称</button>
+                <button onclick="location.href='/edit'" type="button" class="btn btn-default">更改资料</button>
             </li>
             <li>
                 <button onclick="location.href='/articles/write'" type="button" class="btn btn-default">写文章</button>

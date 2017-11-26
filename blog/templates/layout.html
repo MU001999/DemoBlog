@@ -120,10 +120,13 @@
             {% else %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown pull-right">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">{{ session.get('nickname') }}<strong class="caret"></strong></a>
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <img src="/static/imgs/users/{{ session['avatar'] }}" class="img-circle avatar">
+                        {{ session['username'] }}<strong class="caret"></strong>
+                    </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/editpwd">改密码</a>
+                            <a href="/edit">更改资料</a>
                         </li>
                         <li>
                             <a href="/articles/write">写文章</a>

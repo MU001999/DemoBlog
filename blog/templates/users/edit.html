@@ -2,26 +2,59 @@
 
 {% block content %}
 
-<div style="padding: 100px 100px 10px;">
-    {% if not see %}
-    <form class="bs-example bs-example-form" role="form" method="post" action="/editpwd">
-        <div class="input-group" style="width: 30em;">
-            <span class="input-group-addon">密码将修改为</span>
-            <input name="password" type="password" class="form-control">
-        </div>
-        <br>
-        <button type="submit" class="btn btn-default">修改密码</button>
-    </form>
-    {% else %}
-    <form class="bs-example bs-example-form" role="form" method="post" action="/editnick">
-        <div class="input-group" style="width: 30em;">
-            <span class="input-group-addon">昵称将修改为</span>
-            <input name="nickname" class="form-control">
-        </div>
-        <br>
-        <button type="submit" class="btn btn-default">修改昵称</button>
-    </form>
-    {% endif %}
+<script>
+    function editavatar
+</script>
+
+<br><br><br>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        {% if user['avatar'] %}
+        <img src="/static/imgs/users/{{ user['avatar'] }}" class="img-responsive img-circle">
+        {% else %}
+        <img src="/static/imgs/default.jpg" class="img-responsive img-circle">
+        {% endif %}
+    </div>
+    <div class="col-md-4 column">
+        <form class="bs-example bs-example-form" role="form" method="post" action="/editavatar" enctype="multipart/form-data">
+            <div class="form-group">
+                <br>
+                <label for="file">上传头像(支持jpg及png)</label>
+                <input type="file" id="file" name="file">
+                <p class="help-block">文件名请不要夹含中文，且不提供裁剪</p>
+            </div>
+            <button type="submit" class="btn btn-default">更改头像</button>
+            <br><br>
+        </form>
+    </div>
+    <div class="col-md-4 column">
+        <form class="bs-example bs-example-form" role="form" method="post" action="/editinfo">
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">昵称将修改为</span>
+                <input name="nickname" type="text" class="form-control" value="{{ user['nickname'] }}">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">签名将修改为</span>
+                <input name="sign" type="text" class="form-control" value="{{ user['sign'] }}">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-default">修改资料</button>
+            <br><br>
+        </form>
+    </div>
+    <div class="col-md-4 column">
+        <form class="bs-example bs-example-form" role="form" method="post" action="/editpwd">
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">密码将修改为</span>
+                <input name="password" type="password" class="form-control">
+            </div>
+            <br><br><br><br>
+            <button type="submit" class="btn btn-default">修改密码</button>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

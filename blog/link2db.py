@@ -85,16 +85,20 @@ def update_user(username, u2n, info):
         u2n = to_str(u2n)
         u2n = bcrypt.hashpw(u2n, bcrypt.gensalt(8))
         u2n = to_unicode(u2n)
-        users.update({"username": username}, {"$set": {"password": u2n}})
-    elif info == "nick":
+        users.update({"username": username},
+                     {"$set": {"password": u2n}})
+    elif info == "info":
         global articles_sorted
         users.update({"username": username},
-                     {"$set": {"nickname": u2n}}, multi=True)
+                     {"$set": {"nickname": u2n[0], "sign": u2n[1]}}, multi=True, upsert=True)
         articles.update({"username": username},
-                        {"$set": {"author": u2n}}, multi=True)
+                        {"$set": {"author": u2n[0]}}, multi=True)
         posts.update({"username": username},
-                     {"$set": {"lz": u2n}}, multi=True)
+                     {"$set": {"lz": u2n[0]}}, multi=True)
         articles_sorted = articles.find({"type": "article"}).sort("order", pymongo.DESCENDING)
+    elif info == "avatar":
+        users.update({"username": username},
+                     {"$set": {"avatar": u2n}})
 
 
 def get_user(username):

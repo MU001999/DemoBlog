@@ -25,3 +25,15 @@ body {
 .article1:hover{
     background-color: rgba(255, 255, 255, 1);
 }
+
+.avatar{
+    height: 30px;
+    wight: 30px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.avatar_me{
+    height: 100px;
+    wight: 100px;
+}
