@@ -8,7 +8,7 @@ from blog.link2db import *
 
 app.secret_key = os.urandom(24)
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 def allowed_file(filename):
