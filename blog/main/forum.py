@@ -40,6 +40,11 @@ def write_post():
 
 @app.route('/forum/plates/<name>')
 def set_plate(name):
+    if session.get('logged_in', False):
+        return render_template('/forum/forum.html',
+                               posts=get_posts_by_plate(name),
+                               name=name,
+                               user=get_user(session['username']))
     return render_template('/forum/forum.html',
-                           name=name,
-                           posts=get_posts_by_plate(name))
+                           posts=get_posts_by_plate(name),
+                           name=name)
