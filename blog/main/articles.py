@@ -62,14 +62,15 @@ def set_article(order):
 
 @app.route('/articles/all/<int:page_id>')
 def set_articles(page_id=0):
-    page_ids = range(max(0, min(page_id-2, articles.count()/10)), min(page_id+3, articles.count()//10+1))
+    count = articles_sorted.count()
+    page_ids = range(max(0, min(page_id-2, count/10)), min(page_id+3, count//10+1))
     _articles = get_articles(page_id)
     return render_template('/articles/articles.html',
                            author="ALL AUTHORS",
                            articles=_articles,
                            pre=max(page_id-1, 0),
                            page_ids=page_ids,
-                           next=min(articles.count()//10, page_id+1))
+                           next=min(count//10, page_id+1))
 
 
 @app.route('/del/articles', methods=['POST'])

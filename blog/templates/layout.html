@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css" rel="stylesheet">
-    <!--自定义css-->
+    <!--自定义css&js-->
     <link href="/static/css/default.css" rel="stylesheet">
+    <script src="/static/js/default.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,97 +17,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.2/showdown.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script>
-        function login()
-        {
-            username = $("#username").val();
-            password = $("#password").val();
-            var formData = new FormData();
-            formData.append("username", username);
-            formData.append("password", password);
-            $.ajax({
-                url: '/login',
-                data: formData,
-                type: "POST",
-                contentType: false,
-                async: false,
-                processData: false,
-                success: function(res){
-                    if (res == "success"){
-                        var s = new String(window.location.href);
-                        if (s.indexOf("/signup")==-1){
-                            location.reload();
-                        }
-                        else{
-                            window.location.href="/";
-                        }
-                    }
-                    else if (res == "username"){
-                        alert("用户名不存在");
-                    }
-                    else if (res == "password"){
-                        alert("密码错误(用户名存在)");
-                    }
-                    else{
-                        alert("未知错误");
-                    }
-                },
-                fail: function(){
-                    alert("未知错误");
-                }
-            });
-        };
-
-        function logout(){
-            $.get('/logout', function(){
-                var s = new String(window.location.href);
-                if (s.indexOf("/edit")==-1){
-                    location.reload();
-                }
-                else{
-                    window.location.href="/";
-                }
-            });
-        };
-
-        function signup()
-        {
-            nickname = $("#nnickname").val();
-            username = $("#nusername").val();
-            password = $("#npassword").val();
-            email_addr = $("#email_addr").val();
-            var formData = new FormData();
-            formData.append("nickname", nickname);
-            formData.append("username", username);
-            formData.append("password", password);
-            formData.append("email_addr", email_addr);
-            $.ajax({
-                url: '/signup',
-                data: formData,
-                type: "POST",
-                contentType: false,
-                async: false,
-                processData: false,
-                success: function(res){
-                    if (res == "success"){
-                        var s = new String(window.location.href);
-                        if (s.indexOf("/signup")==-1){
-                            location.reload();
-                        }
-                        else{
-                            window.location.href="/";
-                        }
-                    }
-                    else{
-                        alert("用户名已存在");
-                    }
-                },
-                fail: function(){
-                    alert("未知错误");
-                }
-            });
-        };
-    </script>
 </head>
 
 <body>
@@ -208,7 +118,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="login()" class="btn btn-default" data-dismiss="modal">登录</button>
+                        <button type="submit" onclick="login()" class="btn btn-default" data-dismiss="modal">登录</button>
                     </div>
                 </form>
             </div>
@@ -240,7 +150,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="signup()" class="btn btn-default" data-dismiss="modal">注册</button>
+                        <button type="submit" onclick="signup()" class="btn btn-default" data-dismiss="modal">注册</button>
                     </div>
                 </form>
             </div>

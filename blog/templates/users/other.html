@@ -26,7 +26,7 @@
                 </h4>
             </div>
             <div class="panel-footer article1" onclick="location.href='/users/{{ article['username'] }}'">
-                <strong>{{ article['author'] }}</strong><em>    {{ article['time_post'] }}</em>
+                <strong>{{ article['author'] }}</strong> 发布于 <em>    {{ article['time_post'] }}</em>
             </div>
         </div>
         {% endif %}
@@ -45,7 +45,7 @@
                 </h4>
             </div>
             <div class="panel-footer article1" onclick="location.href='/users/{{ post['username'] }}'">
-                <strong>{{ post['lz'] }}</strong><em>    {{ post['time_post'] }}</em>
+                <strong>{{ post['lz'] }}</strong> 发于 <em>    {{ post['time_post'] }}</em>
             </div>
         </div>
         {% endfor %}
