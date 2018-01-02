@@ -42,10 +42,8 @@ def logout():
     return "success"
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
-    if request.method == "GET":
-        return render_template('/users/signup.html')
     if check_exist(request.form['username']):
         return "error"
 

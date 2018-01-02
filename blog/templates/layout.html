@@ -68,6 +68,44 @@
                 }
             });
         };
+
+        function signup()
+        {
+            nickname = $("#nnickname").val();
+            username = $("#nusername").val();
+            password = $("#npassword").val();
+            email_addr = $("#email_addr").val();
+            var formData = new FormData();
+            formData.append("nickname", nickname);
+            formData.append("username", username);
+            formData.append("password", password);
+            formData.append("email_addr", email_addr);
+            $.ajax({
+                url: '/signup',
+                data: formData,
+                type: "POST",
+                contentType: false,
+                async: false,
+                processData: false,
+                success: function(res){
+                    if (res == "success"){
+                        var s = new String(window.location.href);
+                        if (s.indexOf("/signup")==-1){
+                            location.reload();
+                        }
+                        else{
+                            window.location.href="/";
+                        }
+                    }
+                    else{
+                        alert("用户名已存在");
+                    }
+                },
+                fail: function(){
+                    alert("未知错误");
+                }
+            });
+        };
     </script>
 </head>
 
@@ -106,23 +144,20 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="target" placeholder="精确查找">
                 </div>
-                <button type="submit" class="btn btn-default">查找</button>
+                <button type="submit" class="btn btn-default" >查找</button>
             </form>
             {% if not session.logged_in %}
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/signup" style="color:#C00000">免费注册</a>
+                    <a id="modal-123" href="#modal-container-123" data-toggle="modal"><strong>Sign in</strong></a>
+                </li>
+                <li style="margin-left:-15px;margin-right:-15px;">
+                    <p class="navbar-text">or</p>
+                </li>
+                <li>
+                    <a id="modal-456" href="#modal-container-456" data-toggle="modal"><strong>Sign up</strong></a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <label class="sr-only"></label>
-                    <input type="text" class="form-control" id="username" placeholder="用户名">
-                    <label class="sr-only"></label>
-                    <input type="password" class="form-control" id="password" placeholder="密码">
-                </div>
-                <button type="button" onclick="login()" class="btn btn-primary">登录</button>
-            </form>
             {% else %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown pull-right">
@@ -157,6 +192,60 @@
     <br><br>
     <p class="text-center">京ICP备17013700号</p>
     <br><br>
+    <div class="modal fade" id="modal-container-123" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-body">
+                        <div class="input-group" style="width: 30em;">
+                            <span class="input-group-addon">用户名</span>
+                            <input id="username" name="nusername" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
+                        </div>
+                        <br>
+                        <div class="input-group" style="width: 30em;">
+                            <span class="input-group-addon">密　码</span>
+                            <input id="password" name="npassword" type="password" class="form-control" placeholder="请输入密码">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="login()" class="btn btn-default" data-dismiss="modal">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-container-456" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-body">
+                        <div class="input-group" style="width: 30em;">
+                            <span class="input-group-addon">昵　称</span>
+                            <input id="nnickname" name="nnickname" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入昵称">
+                        </div>
+                        <br>
+                        <div class="input-group" style="width: 30em;">
+                            <span class="input-group-addon">用户名</span>
+                            <input id="nusername" name="nusername" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入用户名，只限字母和数字">
+                        </div>
+                        <br>
+                        <div class="input-group" style="width: 30em;">
+                            <span class="input-group-addon">密　码</span>
+                            <input id="npassword" name="npassword" type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control" placeholder="请输入密码">
+                        </div>
+                        <br>
+                        <div class="input-group" style="width: 30em;">
+                            <span class="input-group-addon">邮　箱</span>
+                            <input id="email_addr" name="email_addr" type="email" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入常用邮箱">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="signup()" class="btn btn-default" data-dismiss="modal">注册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -3,7 +3,6 @@
 }
 body {
     padding-top: 70px !important;
-    background-image: url('/static/imgs/background.jpg') !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
