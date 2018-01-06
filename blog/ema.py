@@ -18,7 +18,6 @@ class SendEmail(object):
     def __init__(self):
         pass
 
-
     @staticmethod
     def _format_addr(s):
         name, addr = parseaddr(s)

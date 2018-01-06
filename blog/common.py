@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import random
-from PIL import Image
+from PIL import Image, ImageColor
 import numpy as np
 
 
@@ -20,12 +20,8 @@ def to_unicode(unicode_or_str):
 
 
 def avatar_gen(username):
-    image = np.array([255]*10000, dtype='int')
-    image = image.reshape([100, 100])
-    image = Image.fromarray(image)
-    image = image.convert('RGB')
-    image = np.asarray(image)
-    image = np.copy(image)
+    image = Image.new('RGB', (100, 100), ImageColor.getrgb('#ffffff'))
+    image = np.copy(np.asarray(image))
     for i in range(10):
         for j in range(10):
             if random.randint(0, 1) or i <= 1 or i >= 8 or j <= 1 or j >= 8:
