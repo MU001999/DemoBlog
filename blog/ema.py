@@ -10,8 +10,8 @@ from blog.common import *
 
 
 class SendEmail(object):
-    from_addr = "mu00@jusot.com"
-    password = "Woaini18.."
+    from_addr = ""
+    password = ""
     smtp_server = "smtp.exmail.qq.com"
     smtp_port = 465
 
