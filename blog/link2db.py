@@ -59,10 +59,11 @@ def add_user(username, password, nickname, email_addr):
         password = to_str(password)
         password = bcrypt.hashpw(password, bcrypt.gensalt(8))
         password = to_unicode(password)
+        avatar_path = avatar_gen(username)
         users.insert_one({'username': username,
                           'password': password,
                           'nickname': nickname,
-                          'avatar': "default.jpg",
+                          'avatar': avatar_path,
                           'sign': "热爱学习",
                           'email_addr': email_addr})
     except LinkDbError:
