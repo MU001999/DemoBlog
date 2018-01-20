@@ -10,10 +10,10 @@ from blog.common import *
 
 
 class SendEmail(object):
-    from_addr = ""
-    password = ""
-    smtp_server = "smtp.exmail.qq.com"
-    smtp_port = 465
+    from_addr = get_config('email', 'from_addr')
+    password = get_config('email', 'password')
+    smtp_server = get_config('email', 'smtp_server')
+    smtp_port = int(get_config('email', 'smtp_port'))
 
     def __init__(self):
         pass

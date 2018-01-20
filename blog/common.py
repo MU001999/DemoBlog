@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 import os
 import random
+import ConfigParser
 from PIL import Image, ImageColor
 import numpy as np
 
@@ -38,3 +40,9 @@ def avatar_gen(username):
         os.mkdir(os.path.join('blog', 'static', 'imgs', 'users', username))
     image.save(os.path.join('blog', 'static', 'imgs', 'users', username, 'default.jpg'))
     return os.path.join(username, "default.jpg")
+
+
+def get_config(section, key):
+    config = ConfigParser.ConfigParser()
+    config.read('default.conf')
+    return config.get(section, key)

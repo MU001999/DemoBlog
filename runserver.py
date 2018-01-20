@@ -13,4 +13,4 @@ if __name__ == "__main__":
         PORT = int(environ.get('SERVER_HOST', '80'))
     except ValueError:
         PORT = 80
-    socketio.run(app, debug=True, host=HOST, port=PORT)
+    socketio.run(app, host=HOST, port=PORT)
