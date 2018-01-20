@@ -44,5 +44,5 @@ def avatar_gen(username):
 
 def get_config(section, key):
     config = ConfigParser.ConfigParser()
-    config.read('default.conf')
+    config.read(os.path.join('blog', 'default.conf'))
     return config.get(section, key)
