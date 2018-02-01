@@ -5,8 +5,13 @@ import bcrypt
 from blog.common import *
 
 
-conn = pymongo.MongoClient('localhost', 27017)
+conn = pymongo.MongoClient(get_config('mongodb', 'host'),
+                           int(get_config('mongodb', 'port')),
+                           authMechanism=get_config('mongodb', 'authMechanism'))
 db = conn.demoblog
+db.authenticate(get_config('mongodb', 'username'),
+                get_config('mongodb', 'password'))
+
 
 users = db.users
 codes = db.codes
