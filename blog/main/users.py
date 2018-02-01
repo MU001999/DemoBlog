@@ -73,7 +73,7 @@ def edit_avatar():
     f = request.files['file']
     if f and allowed_file(f.filename):
         if not os.path.isdir(os.path.join('blog', 'static', 'imgs', 'users', session['username'])):
-            os.mkdir(os.path.join('blog', 'static', 'imgs', 'users', session['username']))
+            os.makedirs(os.path.join('blog', 'static', 'imgs', 'users', session['username']))
         file_name = os.path.join('blog', 'static', 'imgs', 'users', session['username'], secure_filename(f.filename))
         f.save(file_name)
         update_user(session['username'], os.path.join(session['username'], f.filename), "avatar")
