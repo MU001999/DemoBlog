@@ -20,82 +20,90 @@
 </head>
 
 <body>
-<div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/me">我</a>
-        </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="/">首页</a>
-                </li>
-                <li>
-                    <a href="/articles/all/0">文章</a>
-                </li>
-                <li>
-                    <a href="/forum">论坛</a>
-                </li>
-                <li>
-                    <a href="/chat">瞎侃</a>
-                </li>
-                <li>
-                    <a href="/codes/paste">贴代码</a>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left" role="search" action="/search" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="target" placeholder="精确查找">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/me">我</a>
                 </div>
-                <button type="submit" class="btn btn-default" >查找</button>
-            </form>
-            {% if not session.logged_in %}
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a id="modal-123" href="#modal-container-123" data-toggle="modal"><strong>Sign in</strong></a>
-                </li>
-                <li style="margin-left:-15px;margin-right:-15px;">
-                    <p class="navbar-text">or</p>
-                </li>
-                <li>
-                    <a id="modal-456" href="#modal-container-456" data-toggle="modal"><strong>Sign up</strong></a>
-                </li>
-            </ul>
-            {% else %}
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown pull-right">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                        <img src="/static/imgs/users/{{ session['avatar'] }}" class="img-circle avatar">
-                        {{ session['username'] }}<strong class="caret"></strong>
-                    </a>
-                    <ul class="dropdown-menu">
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
                         <li>
-                            <a href="/edit">更改资料</a>
+                            <a href="/">首页</a>
                         </li>
                         <li>
-                            <a href="/articles/write">写文章</a>
+                            <a href="/articles/all/0">文章</a>
+                        </li>
+                        <li>
+                            <a href="/forum">论坛</a>
+                        </li>
+                        <li>
+                            <a href="/chat">瞎侃</a>
                         </li>
                         <li>
                             <a href="/codes/paste">贴代码</a>
                         </li>
-                        <li class="divider">
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search" action="/search" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="target" placeholder="精确查找">
+                        </div>
+                        <button type="submit" class="btn btn-default" >查找</button>
+                    </form>
+                    {% if not session.logged_in %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a id="modal-123" href="#modal-container-123" data-toggle="modal"><strong>Sign in</strong></a>
+                        </li>
+                        <li style="margin-left:-15px;margin-right:-15px;">
+                            <p class="navbar-text">or</p>
                         </li>
                         <li>
-                            <a onclick="logout()"><p class="text-danger">登出</p></a>
+                            <a id="modal-456" href="#modal-container-456" data-toggle="modal"><strong>Sign up</strong></a>
                         </li>
                     </ul>
-                </li>
-            </ul>
-            {% endif %}
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown pull-right">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                <img src="/static/imgs/users/{{ session['avatar'] }}" class="img-circle avatar">
+                                {{ session['username'] }}<strong class="caret"></strong>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/edit">更改资料</a>
+                                </li>
+                                <li>
+                                    <a href="/articles/write">写文章</a>
+                                </li>
+                                <li>
+                                    <a href="/codes/paste">贴代码</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a onclick="logout()"><p class="text-danger">登出</p></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<div class="container">
     <div>
         {% block content %}{% endblock %}
     </div>
