@@ -12,7 +12,6 @@ db = conn.demoblog
 db.authenticate(get_config('mongodb', 'username'),
                 get_config('mongodb', 'password'))
 
-
 users = db.users
 codes = db.codes
 articles = db.articles
@@ -126,7 +125,7 @@ def get_code(order):
 def add_article(title, author, content, time_post, username, labels, completed):
     global articles_sorted
     try:
-        order = articles.find().count()
+        order = (articles_sorted[0]['order'] or 0) + 1
         articles.insert_one({'order': order,
                              'type': 'article',
                              'title': title,
