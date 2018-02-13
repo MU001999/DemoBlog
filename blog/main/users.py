@@ -87,6 +87,7 @@ def edit_info():
     u2n.append(request.form['nickname'])
     u2n.append(request.form.get('sign', ""))
     u2n.append(request.form.get('email_addr', ""))
+    u2n.append(request.form.get('github_username', ""))
     update_user(session['username'], u2n, "info")
     session['nickname'] = u2n[0]
     return redirect('/edit')

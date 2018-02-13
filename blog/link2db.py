@@ -88,7 +88,8 @@ def update_user(username, u2n, info):
         users.update({"username": username},
                      {"$set": {"nickname": u2n[0],
                                "sign": u2n[1],
-                               "email_addr": u2n[2]}}, multi=True, upsert=True)
+                               "email_addr": u2n[2],
+                               "github_username": u2n[3]}}, multi=True, upsert=True)
         articles.update({"username": username},
                         {"$set": {"author": u2n[0]}}, multi=True, upsert=True)
         posts.update({"username": username},

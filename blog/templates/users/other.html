@@ -2,13 +2,16 @@
 
 {% block content %}
 <div class="row clearfix">
-    <div class="col-md-12 column">
+    <div class="col-md-12 column text-center">
         <img src="/static/imgs/users/{{ user['avatar'] }}" class="center-block img-circle avatar_me">
         <h3 class="text-center">
             {{ user['nickname'] }}
         </h3>
-        <p class="text-center"><em>{{ user['username'] }}</em></p>
         <p class="text-center">{{ user['sign'] }}</p>
+        {% if user['github_username'] %}
+        &emsp;&emsp;&emsp;&emsp;
+        <iframe src="https://ghbtns.com/github-btn.html?user={{ user['github_username'] }}&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="30px"></iframe>
+        {% endif %}
     </div>
 </div>
 <div class="row clearfix">
