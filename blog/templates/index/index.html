@@ -15,7 +15,7 @@
         <br>
         {% for article in articles %}
         {% if article['completed'] %}
-        <div class="panel panel-info article">
+        <div class="panel panel-default article">
             <div class="panel-body article2" onclick="location.href='/articles/{{ article['order'] }}'">
                 <h4>
                     <strong>{{ article['title'] }}</strong>
@@ -34,7 +34,7 @@
         </p>
         <br>
         {% for post in posts %}
-        <div class="panel panel-info article">
+        <div class="panel panel-default article">
             <div class="panel-body article2" onclick="location.href='/forum/posts/{{ post['order'] }}'">
                 <h4>
                     <strong>{{ post['title'] }}</strong>

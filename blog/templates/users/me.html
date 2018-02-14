@@ -110,7 +110,7 @@
         {% for article in _ %}
         {% if article['completed'] %}
 
-        <div class="panel panel-info article">
+        <div class="panel panel-default article">
             <div class="panel-heading article2" onclick="location.href='/articles/edit/{{ article['order'] }}'">修改文章</div>
             <div class="panel-body article2" onclick="location.href='/articles/{{ article['order'] }}'">
                 <h4>
@@ -125,7 +125,7 @@
 
         {% else %}
 
-        <div class="panel panel-info article">
+        <div class="panel panel-default article">
             <div class="panel-heading article2" onclick="location.href='/articles/edit/{{ article['order'] }}'">修改文章</div>
             <div class="panel-body article2" onclick="location.href='/articles/{{ article['order'] }}'">
                 <h4>
