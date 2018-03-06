@@ -37,3 +37,22 @@ body {
     height: 100px;
     wight: 100px;
 }
+
+.eye {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background: #CCC;
+}
+.eye:after { /*pupil*/
+  position: absolute;
+  bottom: 17px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: #000;
+  border-radius: 50%;
+  content: " ";
+}
