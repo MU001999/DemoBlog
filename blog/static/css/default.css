@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
     background-size: 100% !important;
-    background-image: url(https://area.sinaapp.com/bingImg/);
+    background-image: url(/static/imgs/background.jpg);
 }
 
 .article{

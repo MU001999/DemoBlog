@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 
-{% block content %}
+{% block header %}
 
-<div class="page-header">
-    <h1>
-        {{ poster }}
-        <small>{{ syntax }}</small>
-    </h1>
-</div>
+<h1 class="text-center">
+    {{ poster }}
+    <small>{{ syntax }}</small>
+</h1>
+
+{% endblock %}
+
+{% block content %}
 
 <div>
     <pre><code class="{{ syntax }}">{{ content }}</code></pre>

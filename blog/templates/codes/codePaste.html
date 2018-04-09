@@ -1,10 +1,14 @@
 {% extends "layout.html" %}
 
-{% block content %}
+{% block header %}
 
-<div class="page-header">
-    <h1>CODE # PASTE</h1>
-</div>
+<h1 class="text-center">
+    CODE # PASTE
+</h1>
+
+{% endblock %}
+
+{% block content %}
 <div>
     <form action="/codes/paste" method="POST">
         <div class="form-group">

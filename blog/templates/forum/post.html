@@ -3,62 +3,6 @@
 {% block content %}
 
 <div class="row clearfix">
-    {% if not session.logged_in %}
-    <div class="alert alert-danger" role="alert">
-        您现在的身份为访客，请先于右上角登录。
-    </div>
-    {% else %}
-    <div class="col-md-4 column">
-        <h3>
-            {{ session.get('nickname') }}<small>    {{ session.get('username') }}</small>
-        </h3>
-        <ul class="list-inline">
-            <li>
-                <button onclick="location.href='/edit'" type="button" class="btn btn-default">更改资料</button>
-            </li>
-            <li>
-                <button onclick="location.href='/articles/write'" type="button" class="btn btn-default">写文章</button>
-            </li>
-            <li>
-                <a id="modal-246585" href="#modal-container-246585" role="button" class="btn btn-block btn-default" data-toggle="modal">发帖子</a>
-            </li>
-            <li>
-                <button onclick="location.href='/codes/paste'" type="button" class="btn btn-default btn-block">贴代码</button>
-            </li>
-        </ul>
-    </div>
-    {% endif %}
-    <div class="modal fade" id="modal-container-246585" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="/forum/posts/write" method="post">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">
-                            <input type="text" name="title" placeholder="主题">
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <label for="id_content">内容：</label>
-                        <textarea class="form-control" rows="3" id="id_content" name="content"></textarea>
-                        <label for="id_plate">板块：</label>
-                        <select id="id_plate" name="plate" class="form-control">
-                            <option value ="cpp">C/C++</option>
-                            <option value ="cs">C#</option>
-                            <option value="py">Python</option>
-                            <option value="mis">杂谈</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="submit" class="btn btn-default">发表</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<br><br>
-<div class="row clearfix">
     <div class="col-md-12 column">
         <div class="panel panel-success article">
             <div class="panel-heading lead">

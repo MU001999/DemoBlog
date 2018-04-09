@@ -37,8 +37,7 @@
                     <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"rows="20" cols="60">{{ article['content']|safe }}</textarea>
                 </div>
                 <div class="col-md-6 column">
-                    <div id="preview"> </div>
-                    <script src="/static/js/showdown.min.js"></script>
+                    <div id="preview" style="background-color: rgba(255,255,255,0.9); padding: 5px;"></div>
                     <script type="text/javascript">
                     function convert(){
                         var text = document.getElementById("oriContent").value;
@@ -80,8 +79,7 @@
                     <textarea id="oriContent" class="form-control" onkeyup="convert()" name="content"rows="20" cols="60">使用MarkDown语法编辑您的文章</textarea>
                 </div>
                 <div class="col-md-6 column">
-                    <div id="preview"> </div>
-                    <script src="/static/js/showdown.min.js"></script>
+                    <div id="preview" style="background-color: rgba(255,255,255,0.9); padding: 5px;">使用MarkDown语法编辑您的文章</div>
                     <script type="text/javascript">
                     function convert(){
                         var text = document.getElementById("oriContent").value;
