@@ -102,69 +102,81 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="text-center">
-        <div class='eye'></div>
-        <div class='eye'></div>
-    </div>
-    <div>
-        {% block content %}{% endblock %}
-    </div>
-    <div class="modal fade" id="modal-container-123" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-body">
-                        <div class="input-group" style="width: 30em;">
-                            <span class="input-group-addon">用户名</span>
-                            <input id="username" name="nusername" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
-                        </div>
-                        <br>
-                        <div class="input-group" style="width: 30em;">
-                            <span class="input-group-addon">密　码</span>
-                            <input id="password" name="npassword" type="password" class="form-control" placeholder="请输入密码">
-                        </div>
+
+<div class="modal fade" id="modal-container-123" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-body">
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">用户名</span>
+                        <input id="username" name="nusername" type="text" class="form-control" placeholder="请输入用户名，只限字母和数字">
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" onclick="login()" class="btn btn-default" data-dismiss="modal">登录</button>
+                    <br>
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">密　码</span>
+                        <input id="password" name="npassword" type="password" class="form-control" placeholder="请输入密码">
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modal-container-456" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-body">
-                        <div class="input-group" style="width: 30em;">
-                            <span class="input-group-addon">昵　称</span>
-                            <input id="nnickname" name="nnickname" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入昵称">
-                        </div>
-                        <br>
-                        <div class="input-group" style="width: 30em;">
-                            <span class="input-group-addon">用户名</span>
-                            <input id="nusername" name="nusername" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入用户名，只限字母和数字">
-                        </div>
-                        <br>
-                        <div class="input-group" style="width: 30em;">
-                            <span class="input-group-addon">密　码</span>
-                            <input id="npassword" name="npassword" type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control" placeholder="请输入密码">
-                        </div>
-                        <br>
-                        <div class="input-group" style="width: 30em;">
-                            <span class="input-group-addon">邮　箱</span>
-                            <input id="email_addr" name="email_addr" type="email" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入常用邮箱">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" onclick="signup()" class="btn btn-default" data-dismiss="modal">注册</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="login()" class="btn btn-default" data-dismiss="modal">登录</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-container-456" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-body">
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">昵　称</span>
+                        <input id="nnickname" name="nnickname" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入昵称">
+                    </div>
+                    <br>
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">用户名</span>
+                        <input id="nusername" name="nusername" type="text" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入用户名，只限字母和数字">
+                    </div>
+                    <br>
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">密　码</span>
+                        <input id="npassword" name="npassword" type="password" readonly onfocus="this.removeAttribute('readonly');" class="form-control" placeholder="请输入密码">
+                    </div>
+                    <br>
+                    <div class="input-group" style="width: 30em;">
+                        <span class="input-group-addon">邮　箱</span>
+                        <input id="email_addr" name="email_addr" type="email" class="form-control" readonly onfocus="this.removeAttribute('readonly');" placeholder="请输入常用邮箱">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="signup()" class="btn btn-default" data-dismiss="modal">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="background-color: rgba(255,255,255, 0.9);">
+    <div class="row clearfix">
+        <div class="col-md-3 column"></div>
+        <div class="col-md-6 column">
+            <br>
+            <div class="text-center">
+                <div class='eye'></div>
+                <div class='eye'></div>
+            </div>
+            {% block header %}{% endblock %}
+        </div>
+        <div class="col-md-3 column"></div>
+    </div>
+</div>
+<br>
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
 <footer class="container-fluid foot-wrap" style="background:#202020;padding:35px;margin-top:50px;">
     <div class="container text-center">
         <div class="row">

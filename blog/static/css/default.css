@@ -2,16 +2,16 @@
     margin-right: 0.5em !important;
 }
 body {
-    padding-top: 70px !important;
+    padding-top: 50px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
     background-size: 100% !important;
-    background-color: #ebebeb;
+    background-image: url(https://area.sinaapp.com/bingImg/);
 }
 
 .article{
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .article2:hover{
@@ -19,7 +19,7 @@ body {
 }
 
 .article1{
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .article1:hover{

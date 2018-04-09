@@ -1,13 +1,16 @@
 {% extends "layout.html" %}
 
+{% block header %}
+
+<h1 class="text-center">
+    {{ author }}
+</h1>
+
+{% endblock %}
+
 {% block content %}
 
 <div class="row clearfix">
-    <div class="page-header">
-        <h1>
-            {{ author }}
-        </h1>
-    </div>
     <div class="col-md-12 column">
         {% for article in articles %}
         {% if article['completed'] %}

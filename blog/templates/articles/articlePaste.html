@@ -23,15 +23,19 @@
                               rows="40">使用MarkDown语法编辑您的文章</textarea>
                 </div>
                 <div class="col-md-6 column">
-                    <div id="preview" class="form-control"> </div>
-                    <script type="text/javascript">
-                    function convert(){
-                        var text = document.getElementById("oriContent").value;
-                        var converter = new showdown.Converter();
-                        var html = converter.makeHtml(text);
-                        document.getElementById("preview").innerHTML = html;
-                    }
-                    </script>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="preview" class="form-control">使用MarkDown语法编辑您的文章</div>
+                            <script type="text/javascript">
+                            function convert(){
+                                var text = document.getElementById("oriContent").value;
+                                var converter = new showdown.Converter();
+                                var html = converter.makeHtml(text);
+                                document.getElementById("preview").innerHTML = html;
+                            }
+                            </script>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
