@@ -6,3 +6,4 @@ made by Flask, Bootstrap and MongoDB
 
 ### TODO
 * 优化内部逻辑，减少多余开销
+* 添加从链接发表\更新\修改文章\[功能\]
