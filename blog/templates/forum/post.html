@@ -11,7 +11,7 @@
             <div class="panel-body">
                 <p class="lead">{{ post['content'] }}</p>
                 <em>
-                    <strong>{{ post['lz'] }}</strong> on {{ post['time_post'] }}
+                    {{ post['lz'] }} on {{ post['time_post'] }}
                 </em>
             </div>
             <ul class="list-group">
@@ -19,7 +19,7 @@
                 <li class="list-group-item">
                     <em>{{ comment['corder'] }}楼</em>
                     <p class="lead">{{ comment['content'] }}</p>
-                    <p class="text-right"><em ><strong>{{ comment['cz'] }}</strong> on {{ comment['time_comment'] }}</em></p>
+                    <p class="text-right"><em >{{ comment['cz'] }} on {{ comment['time_comment'] }}</em></p>
                 </li>
                 {% endfor %}
             </ul>

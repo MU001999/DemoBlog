@@ -6,6 +6,19 @@
     background-color: #FFFFFF;
 }
 
+.label {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-weight: normal;
+}
+
+.panel .panel-heading {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-weight: normal;
+    border-color: #000000;
+}
+
 .navbar {
     background-color: #FFFFFF;
 }

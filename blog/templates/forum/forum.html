@@ -99,11 +99,11 @@
         <div class="panel panel-default article">
             <div class="panel-body article2" onclick="location.href='/forum/posts/{{ post['order'] }}'">
                 <h4>
-                    <strong>{{ post['title'] }}</strong>
+                    {{ post['title'] }}
                 </h4>
             </div>
             <div class="panel-footer article1" onclick="location.href='/users/{{ post['username'] }}'">
-                <strong>{{ post['lz'] }}</strong> 发于 <em>    {{ post['time_post'] }}</em>
+                {{ post['lz'] }} 发于 <em>    {{ post['time_post'] }}</em>
             </div>
         </div>
 
